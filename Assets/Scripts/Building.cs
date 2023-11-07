@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool Placed { get; private set; }
+    public BoundsInt area;
+
+    private void Start()
     {
-        
+        //Debug.Log("the house is set");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #region Build Methods
+
+    #endregion
 }
