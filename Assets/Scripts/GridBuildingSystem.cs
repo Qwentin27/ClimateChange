@@ -29,13 +29,9 @@ public class GridBuildingSystem : MonoBehaviour
     {
         string tilePath = @"Tiles/";
         tileBases.Add(TileType.Empty, null);
-        //Debug.Log(tileBases[TileType.Empty]);
         tileBases.Add(TileType.White, Resources.Load<TileBase>(tilePath + "white"));
-        //Debug.Log(tileBases[TileType.White]);
         tileBases.Add(TileType.Red, Resources.Load<TileBase>(tilePath + "red"));
-        //Debug.Log(tileBases[TileType.Red]);
         tileBases.Add(TileType.Green, Resources.Load<TileBase>(tilePath + "green"));
-        //Debug.Log(tileBases[TileType.Green]);
     }
 
     private void Update()
@@ -49,24 +45,35 @@ public class GridBuildingSystem : MonoBehaviour
             {
                 Vector2 touchpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int cellPos = gridLayout.LocalToCell(touchpos);
-                Debug.Log(cellPos);
 
                 if (previousPos != cellPos)
                 {
-                    temp.transform.localPosition = gridLayout.CellToLocalInterpolated(cellPos + new Vector3(0f, 0f, 0f));
+                    Debug.Log(cellPos);
+                    temp.transform.position = gridLayout.CellToLocal(cellPos);
+                    temp.area.position = gridLayout.LocalToCell(temp.transform.position);
                     previousPos = cellPos;
                     FollowBuilding();
                 }
 
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (temp.CanBePlaced())
+            {
+                temp.Place();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClearArea();
+            Destroy(temp.gameObject);
+        }
     }
 
     #endregion
 
     #region TileManagement
-
-
 
     private static TileBase[] GetTilesBlock(BoundsInt area, Tilemap tilemap)
     {
@@ -105,45 +112,33 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-
-        temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
+        temp = Instantiate(building, Vector3.zero , Quaternion.identity).GetComponent<Building>();
         FollowBuilding();
     }
 
     private void ClearArea()
     {
-        TileBase[] toClear = new TileBase[previousArea.size.x * previousArea.size.y * previousArea.size.z];
-        FillTiles(toClear, TileType.Empty);
-        TempTilemap.SetTilesBlock(previousArea, toClear);
+        SetTilesBlock(previousArea, TempTilemap, TileType.Empty);
     }
 
     private void FollowBuilding()
     {
         ClearArea();
 
-        temp.area.position = gridLayout.WorldToCell(temp.gameObject.transform.position);
         BoundsInt buildingArea = temp.area;
-        Debug.Log(buildingArea);
 
         TileBase[] baseArray = GetTilesBlock(buildingArea, MainTilemap);
 
-        int size = baseArray.Length;
-        TileBase[] tileArray = new TileBase[size];
-
         for (int i = 0; i < baseArray.Length; i++)
         {
-            if (baseArray[i] == tileBases[TileType.White])
+            if (baseArray[i] != tileBases[TileType.White])
             {
-                baseArray[i] = tileBases[TileType.Green];
-            }
-            else
-            {
-                FillTiles(tileArray, TileType.Red);
-                break;
+                SetTilesBlock(buildingArea, TempTilemap, TileType.Red);
+                previousArea = buildingArea;
+                return;
             }
         }
-
-        TempTilemap.SetTilesBlock(buildingArea, tileArray);
+        SetTilesBlock(buildingArea, TempTilemap, TileType.Green);
         previousArea = buildingArea;
     }
 
@@ -160,6 +155,12 @@ public class GridBuildingSystem : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void TakeArea(BoundsInt area)
+    {
+        SetTilesBlock(area, TempTilemap, TileType.Empty);
+        SetTilesBlock(area, MainTilemap, TileType.Green);
     }
 
     #endregion
