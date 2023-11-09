@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ChangePerso.unity
     guid: 201c2ed369392bc4b8f4312b151344c8
   - enabled: 1
-    path: Assets/Scenes/Test.unity
+    path: Assets/Scenes/Builder.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
