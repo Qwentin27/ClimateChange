@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3dda8bb6b2de858448c348d5415fd45f
   - enabled: 1
+    path: Assets/Scenes/ChangePerso.unity
+    guid: 201c2ed369392bc4b8f4312b151344c8
+  - enabled: 1
     path: Assets/Scenes/Test.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
