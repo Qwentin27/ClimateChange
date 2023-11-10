@@ -48,6 +48,7 @@ public class GridBuildingSystem : MonoBehaviour
             {
                 Vector2 touchpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int cellPos = gridLayout.LocalToCell(touchpos);
+                DeleteTiles(cellPos);
 
                 if (previousPos != cellPos)
                 {
@@ -111,6 +112,24 @@ public class GridBuildingSystem : MonoBehaviour
         }
     }
 
+    private void DeleteTiles(Vector3Int pos)
+    {
+        if (MainTilemap.HasTile(pos))
+        {
+            TileBase t = MainTilemap.GetTile(pos);
+            if(t == tileBases[TileType.White])
+            {
+                Debug.Log("yes");
+            }
+            else if (t == tileBases[TileType.Green])
+            {
+                foreach (var b in buildings)
+                {
+                }
+            }
+        }
+    }
+
     #endregion
 
     #region Building Placement
@@ -119,10 +138,6 @@ public class GridBuildingSystem : MonoBehaviour
     {
         if(button)
         {
-            foreach (var b in buildings)
-            {
-                Debug.Log(b.area);
-            }
             temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
             FollowBuilding();
             button = false;
