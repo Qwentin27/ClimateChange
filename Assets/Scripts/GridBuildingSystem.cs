@@ -11,8 +11,10 @@ public class GridBuildingSystem : MonoBehaviour
     public GridLayout gridLayout;
     public Tilemap MainTilemap;
     public Tilemap TempTilemap;
+    public bool button = true;
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
+    public List<Building> buildings;
 
     private Building temp;
     private Vector3 previousPos;
@@ -32,6 +34,7 @@ public class GridBuildingSystem : MonoBehaviour
         tileBases.Add(TileType.White, Resources.Load<TileBase>(tilePath + "white"));
         tileBases.Add(TileType.Red, Resources.Load<TileBase>(tilePath + "red"));
         tileBases.Add(TileType.Green, Resources.Load<TileBase>(tilePath + "green"));
+        buildings = new List<Building>();
     }
 
     private void Update()
@@ -48,9 +51,7 @@ public class GridBuildingSystem : MonoBehaviour
 
                 if (previousPos != cellPos)
                 {
-                    Debug.Log(cellPos);
-                    temp.transform.position = gridLayout.CellToLocal(cellPos);
-                    temp.area.position = gridLayout.LocalToCell(temp.transform.position);
+                    temp.gameObject.transform.position = gridLayout.CellToLocal(cellPos);
                     previousPos = cellPos;
                     FollowBuilding();
                 }
@@ -62,12 +63,16 @@ public class GridBuildingSystem : MonoBehaviour
             if (temp.CanBePlaced())
             {
                 temp.Place();
+                buildings.Add(temp);
+                temp = null;
+                button = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             ClearArea();
             Destroy(temp.gameObject);
+            button = true;
         }
     }
 
@@ -112,8 +117,16 @@ public class GridBuildingSystem : MonoBehaviour
 
     public void InitializeWithBuilding(GameObject building)
     {
-        temp = Instantiate(building, Vector3.zero , Quaternion.identity).GetComponent<Building>();
-        FollowBuilding();
+        if(button)
+        {
+            foreach (var b in buildings)
+            {
+                Debug.Log(b.area);
+            }
+            temp = Instantiate(building, Vector3.zero, Quaternion.identity).GetComponent<Building>();
+            FollowBuilding();
+            button = false;
+        }
     }
 
     private void ClearArea()
@@ -125,6 +138,7 @@ public class GridBuildingSystem : MonoBehaviour
     {
         ClearArea();
 
+        temp.area.position = gridLayout.LocalToCell(temp.gameObject.transform.position);
         BoundsInt buildingArea = temp.area;
 
         TileBase[] baseArray = GetTilesBlock(buildingArea, MainTilemap);
