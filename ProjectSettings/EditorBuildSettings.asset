@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3dda8bb6b2de858448c348d5415fd45f
   - enabled: 1
-    path: Assets/Scenes/ChangePerso.unity
+    path: Assets/Scenes/ChoixPerso.unity
     guid: 201c2ed369392bc4b8f4312b151344c8
+  - enabled: 1
+    path: Assets/Scenes/ChoixSkin.unity
+    guid: 828b4716ae3050844a0209fa7a011adf
   - enabled: 1
     path: Assets/Scenes/ModeJeu.unity
     guid: 0b9dabfe83d4bbe40898cd3c3eb1737b

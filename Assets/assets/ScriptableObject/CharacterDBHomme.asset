@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1587f030074c3ce44acc8a11ddd3c3f4, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 734bce8ec0f8db248a5be0cd6b196e02, type: 3}
+  m_Name: CharacterDBHomme
   m_EditorClassIdentifier: 
-  choixDuPerso: 1
-  choixModeDeJeu: 0
+  character: []
