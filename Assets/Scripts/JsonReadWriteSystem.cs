@@ -4,19 +4,31 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using Button = UnityEngine.UI.Button;
 
 public class JsonReadWriteSystem : MonoBehaviour
 {
     public string chemin, jsonString;
     public GameObject textDisplay;
     public GameObject ChoiceButton1, ChoiceButton2;
+    public Button btn1, btn2;
+    public int indexPassage = 0;
+    public int indexSort;
     public GameObject ChoiceButton1Text, ChoiceButton2Text;
     public Dictionary<string, Passage> values;
-    public Root root;
+    public Root originRoot;
 
     // faire une fonction pour les choix du joueur et réfléchir aux enbranchements
 
-    public void WriteOnJson() // gestion évènements
+    void Start()
+    {
+        btn1 = ChoiceButton1.GetComponent<Button>();
+        btn2 = ChoiceButton2.GetComponent<Button>();
+        btn1.onClick.AddListener(ChoiceClick1);
+        btn2.onClick.AddListener(ChoiceClick2);
+    }
+
+    public void WriteInJson() // gestion évènements
     {
 
     }
@@ -61,25 +73,66 @@ public class JsonReadWriteSystem : MonoBehaviour
         //jsonString.Replace("passages", "D1"); // va remplacer tous les passages
     }
 
+    public string SortMessages(string sub)
+    {
+        indexSort = sub.IndexOf('|');
+        Debug.Log(sub);
+        Debug.Log(indexSort);
+        sub = sub.Substring(0, indexSort);
+        return sub;
+    }
+
+    public void ChoiceClick1() // le joueur a effectué le choix 1
+    {
+        int indNewPassage = SearchIndexNewPassageThroughChoice(originRoot, indexPassage, 0); //int.Parse(originRoot.passages[indexPassage].links[1].pid);
+        Debug.Log(indNewPassage);
+        DisplayDialogue(originRoot.passages[indNewPassage].text);
+
+    }
+
+    public void ChoiceClick2() // le joueur a effectué le choix 2
+    {
+        int indNewPassage = SearchIndexNewPassageThroughChoice(originRoot, indexPassage, 1); //int.Parse(originRoot.passages[indexPassage].links[1].pid);
+        Debug.Log(indNewPassage);
+        DisplayDialogue(originRoot.passages[indNewPassage].text);
+
+    }
+
+    public int SearchIndexNewPassageThroughChoice(Root root, int indP, int choice)
+    {
+        int indNewPassage = 0;
+
+        for (int i = 0; i < root.passages.Count; i++)
+        {
+            if (root.passages[i].pid == root.passages[indP].links[choice].pid)
+            {
+                indNewPassage = i;
+            }
+        }
+
+        return indNewPassage;
+    }
+
     public void DisplayChoices()
     {
         // Affichage choix 1
 
-        string Choice1 = root.passages[0].links[0].name;
+        string Choice1 = originRoot.passages[0].links[0].name;
         Debug.Log(Choice1);
         ChoiceButton1Text.GetComponent<TMPro.TMP_Text>().text = Choice1;
 
         // Affichage Choix 2
 
-        string Choice2 = root.passages[0].links[1].name;
+        string Choice2 = originRoot.passages[0].links[1].name;
         Debug.Log(Choice2);
         ChoiceButton2Text.GetComponent<TMPro.TMP_Text>().text = Choice2;
     }
 
-    public void DisplayDialogue()
+    public void DisplayDialogue(string passageText)
     {
-        textDisplay.GetComponent<Text>().text = root.passages[0].text;
-        Debug.Log(root.passages[0].text);
+        Debug.Log(passageText);
+        string textToDisp = SortMessages(passageText);
+        textDisplay.GetComponent<Text>().text = textToDisp;
     }
 
     public void LoadFromJson() // voir JsonDemo du projet d'externalisation avec M. Panzoli
@@ -102,9 +155,10 @@ public class JsonReadWriteSystem : MonoBehaviour
 
         chemin = "Assets/Scripts/JSON/TwineOrigin.json";
         jsonString = File.ReadAllText(chemin);
-        root = JsonConvert.DeserializeObject<Root>(jsonString);
+        originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
+        DisplayDialogue(originRoot.passages[0].text);
         //textDisplay.GetComponent<Text>().text = root.passages[0].text;
-        Debug.Log(root.passages[0].text);
+        //Debug.Log(root.passages[0].text);
     }
 
     [System.Serializable]
@@ -133,10 +187,10 @@ public class JsonReadWriteSystem : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Root
+    public class Root // objet contenant l'entièreté d'un acte et les choix possibles
     {
         public List<Passage> passages { get; set; }
-        public string name { get; set; }
+        public string name { get; set; } // nom de l'acte (ici, "Projet Climat")
         public string startnode { get; set; }
         public string creator { get; set; }
 
