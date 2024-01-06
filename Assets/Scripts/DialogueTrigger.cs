@@ -21,7 +21,7 @@ public class DialogueTrigger : MonoBehaviour
 }
 
 
-[System.Serializable]
+[System.Serializable] // classe particulière donc nécessaire pour afficher les éléments dans l'inspector
 public class Message
 {
     public int actorId;
