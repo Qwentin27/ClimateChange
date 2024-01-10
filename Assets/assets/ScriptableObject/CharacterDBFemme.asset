@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: CharacterDBFemme
   m_EditorClassIdentifier: 
   character:
-  - characterSprite: {fileID: 21300000, guid: eb75f4a0c50fa5145abd9acd479747f4, type: 3}
-  - characterSprite: {fileID: 21300000, guid: 83ce33eb5b6785148b6d740a4a87c22f, type: 3}
-  - characterSprite: {fileID: 21300000, guid: 1d46e9c02d111b54793fae66ad7b9e0a, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 7c4bec3f839c6eb4ea85eb14c7a92009, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 50653afa53e7b1e41832733c3c717106, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 7b157971957946b43b95a2876f67f6bb, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 33a506ff29b4052408e96b36370b3cfc, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 155bb0eb9102645489f0d70156e74655, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 663d76bca1fa6c343b10fd62c73c1642, type: 3}
