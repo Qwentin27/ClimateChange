@@ -29,6 +29,12 @@ public class LoadInference : MonoBehaviour {
         }
     }
     
+    public void nextTurn()
+    {
+        GameManager.instance.nextTurn();
+        Predict(GameManager.instance.month, GameManager.instance.ch4, GameManager.instance.co2);
+    }
+
     void OnDestroy() {
         worker?.Dispose();
     }
@@ -45,6 +51,9 @@ public class LoadInference : MonoBehaviour {
         float seaLevel = output[0, 1];
 
         Debug.Log($"Predicted Global Temp: {globalTemp}, Predicted Sea Level: {seaLevel}");
+
+        GameManager.instance.temp = globalTemp;
+        GameManager.instance.sealvl = seaLevel;
 
         inputTensor.Dispose();
         output.Dispose();
