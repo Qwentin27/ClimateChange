@@ -1,0 +1,34 @@
+{
+  "Dialogues": [
+    {
+      "Nom": "Femme",
+      "Dialogues": [
+        {
+          "dial": "Bonjour",
+          "AlreadyPlayed": false
+        }
+      ]
+    }
+  ],
+
+  "Catastrophe": {
+    "1": "Attention Methane",
+    "2": "Attention C02",
+    "3": "Attention à l'eau"
+  },
+
+  "Genre": {
+    "Femme": {
+      "Image": "ImgFemme.png",
+      "Catastrophe": [1, 3]
+    },
+    "Non-Binaire": {
+      "Image": "ImgFemme.png",
+      "Catastrophe": [1, 2]
+    },
+    "Homme": {
+      "Image": "ImgFemme.png",
+      "Catastrophe": [2, 3]
+    }
+  }
+}

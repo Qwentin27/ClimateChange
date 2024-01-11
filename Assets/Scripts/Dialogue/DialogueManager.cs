@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Image actorImage;
+    public Image actorImage; // le reconnaît directement donc pas besoin de mettre "serializable"
     public TMP_Text actorName;
     public TMP_Text messageText;
     public RectTransform backgroundBox;
@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject StartDialogue5;
 
     [Header("Gestion Boutons")]
-    public Button Continuer;
+    //public Button Continuer;
     private string scene;
 
     public Button _passer;
@@ -67,9 +67,9 @@ public class DialogueManager : MonoBehaviour
         if (activeMessage == 0)
         {
             panelContinuer.SetActive(true);
-            Continuer.interactable = true;
-            scene = "Scenes/Niveau " + PlayerPrefs.GetInt("Level").ToString();
-            PlayerPrefs.SetString("NomScene", scene);
+            //Continuer.interactable = true;
+            //scene = "Scenes/Niveau " + PlayerPrefs.GetInt("Level").ToString();
+            //PlayerPrefs.SetString("NomScene", scene);
         }
         else
         {
@@ -112,17 +112,17 @@ public class DialogueManager : MonoBehaviour
         panelContinuer.SetActive(false);
         panelNextLevel.SetActive(false);
 
-        Continuer.interactable = true;
+        //Continuer.interactable = true;
         _passer.interactable = false;
 
         StartDialogue1.SetActive(false);
-        StartDialogue2.SetActive(false);
+        StartDialogue2.SetActive(true);
         StartDialogue3.SetActive(false);
         StartDialogue4.SetActive(false);
         StartDialogue5.SetActive(false);
 
 
-        if (PlayerPrefs.GetInt("Level") == 1) //à voir si on remplace par setpref init player
+        /*if (PlayerPrefs.GetInt("Level") == 1) //à voir si on remplace par setpref init player
         {
             StartDialogue1.SetActive(true);
             StartDialogue2.SetActive(false);
@@ -172,21 +172,22 @@ public class DialogueManager : MonoBehaviour
         if (PlayerPrefs.GetInt("LevelMax") >= (PlayerPrefs.GetInt("Level")))
         {
             _passer.interactable = true;
-        }
+        }*/
 
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        /*if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) 
         {
             NextMessage();
+        }*/
+
+        if (Input.GetKeyDown(KeyCode.Space) && isActive == true) // on appui sur barre espace pour voir le message suivant
+        {
+             NextMessage();
         }
-        // if (Input.GetKeyDown(KeyCode.Space) && isActive == true)
-        // {
-        //     NextMessage();
-        // }
 
 
     }
