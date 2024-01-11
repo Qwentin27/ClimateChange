@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
@@ -15,7 +16,8 @@ public class JsonReadWriteSystem : MonoBehaviour
     public int indexPassage = 0;
     public int indexSort;
     public GameObject ChoiceButton1Text, ChoiceButton2Text;
-    public Dictionary<string, Passage> values;
+    public Dictionary<int, string> dictPassages = new Dictionary<int, string>();
+    public Dictionary<int, List<string>> dictResponses = new Dictionary<int, List<string>>();
     public Root originRoot;
 
     // faire une fonction pour les choix du joueur et réfléchir aux enbranchements
@@ -49,7 +51,7 @@ public class JsonReadWriteSystem : MonoBehaviour
         bool flag1 = true;
         bool flag2 = true;
         jsonString.Replace('[', 'e');
-        Debug.Log(jsonString);
+        //Debug.Log(jsonString);
 
        /*for (int i = 1; i < jsonString.Length; i++)
         {
@@ -73,11 +75,38 @@ public class JsonReadWriteSystem : MonoBehaviour
         //jsonString.Replace("passages", "D1"); // va remplacer tous les passages
     }
 
+    public void FillDictionary()
+    {
+        
+        for (int i = 0; i < originRoot.passages.Count; i++)
+        {
+            dictPassages.Add(int.Parse(originRoot.passages[i].pid), originRoot.passages[i].text);
+            List<string> passLinks = new List<string>();
+            Debug.Log(originRoot.passages[i].links == null);
+            // faire un test pour quand on arrive au bout du passage
+            // pas de minks dans le JSON lorsqu'il n' y a pas de choix 
+            // regarder la fin du JSON 
+            if (originRoot.passages[i].links != null)
+            {
+                for (int j = 0; j < originRoot.passages[i].links.Count; j++)
+                {
+                    passLinks.Add(originRoot.passages[i].links[j].name);
+                }
+                dictResponses.Add(int.Parse(originRoot.passages[i].pid), passLinks);
+            }
+            else
+            {
+                dictResponses.Add(int.Parse(originRoot.passages[i].pid), passLinks);
+            }
+            
+        }
+    }
+
     public string SortMessages(string sub)
     {
         indexSort = sub.IndexOf('|');
-        Debug.Log(sub);
-        Debug.Log(indexSort);
+        //Debug.Log(sub);
+        //Debug.Log(indexSort);
         sub = sub.Substring(0, indexSort);
         return sub;
     }
@@ -85,7 +114,7 @@ public class JsonReadWriteSystem : MonoBehaviour
     public void ChoiceClick1() // le joueur a effectué le choix 1
     {
         int indNewPassage = SearchIndexNewPassageThroughChoice(originRoot, indexPassage, 0); //int.Parse(originRoot.passages[indexPassage].links[1].pid);
-        Debug.Log(indNewPassage);
+        //Debug.Log(indNewPassage);
         DisplayDialogue(originRoot.passages[indNewPassage].text);
 
     }
@@ -93,7 +122,7 @@ public class JsonReadWriteSystem : MonoBehaviour
     public void ChoiceClick2() // le joueur a effectué le choix 2
     {
         int indNewPassage = SearchIndexNewPassageThroughChoice(originRoot, indexPassage, 1); //int.Parse(originRoot.passages[indexPassage].links[1].pid);
-        Debug.Log(indNewPassage);
+        //Debug.Log(indNewPassage);
         DisplayDialogue(originRoot.passages[indNewPassage].text);
 
     }
@@ -118,22 +147,42 @@ public class JsonReadWriteSystem : MonoBehaviour
         // Affichage choix 1
 
         string Choice1 = originRoot.passages[0].links[0].name;
-        Debug.Log(Choice1);
+        //Debug.Log(Choice1);
         ChoiceButton1Text.GetComponent<TMPro.TMP_Text>().text = Choice1;
 
         // Affichage Choix 2
 
         string Choice2 = originRoot.passages[0].links[1].name;
-        Debug.Log(Choice2);
+        //Debug.Log(Choice2);
         ChoiceButton2Text.GetComponent<TMPro.TMP_Text>().text = Choice2;
     }
 
     public void DisplayDialogue(string passageText)
     {
-        Debug.Log(passageText);
+        //Debug.Log(passageText);
         string textToDisp = SortMessages(passageText);
         textDisplay.GetComponent<Text>().text = textToDisp;
     }
+
+    public static void PrintDictPassages<K, V>(Dictionary<K, V> dict)
+    {
+        foreach (K key in dict.Keys)
+        {
+            Debug.Log(key + " : " + dict[key]);
+        }
+    }
+
+    /*public static void PrintDictResponses<K, List<string>>(Dictionary<K, List<string>> dict)
+    {
+        foreach (K key in dict.Keys)
+        {
+            for (int i = 0; i < (dict[key]).Count; i++)
+            {
+                Debug.Log(key + " : " + (dict[key])[i]);
+            }
+            
+        }
+    }*/
 
     public void LoadFromJson() // voir JsonDemo du projet d'externalisation avec M. Panzoli
 
@@ -157,6 +206,19 @@ public class JsonReadWriteSystem : MonoBehaviour
         jsonString = File.ReadAllText(chemin);
         originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
         DisplayDialogue(originRoot.passages[0].text);
+        FillDictionary();
+        PrintDictPassages(dictPassages);
+
+        foreach (int key in dictResponses.Keys)
+        {
+            for (int i = 0; i < (dictResponses[key]).Count; i++)
+            {
+                Debug.Log(key + " : " + (dictResponses[key])[i]);
+            }
+
+        }
+
+
         //textDisplay.GetComponent<Text>().text = root.passages[0].text;
         //Debug.Log(root.passages[0].text);
     }
