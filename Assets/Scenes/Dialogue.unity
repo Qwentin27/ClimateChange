@@ -2467,11 +2467,15 @@ MonoBehaviour:
   backgroundBox: {fileID: 1412264346}
   panelContinuer: {fileID: 253785766}
   panelNextLevel: {fileID: 773376815}
+  currentMessages: []
+  currentActors: []
+  activeMessage: 0
   StartDialogue1: {fileID: 1854609628}
   StartDialogue2: {fileID: 480838869}
   StartDialogue3: {fileID: 158656011}
   StartDialogue4: {fileID: 871534564}
   StartDialogue5: {fileID: 543840083}
+  scene: 
   _passer: {fileID: 1915186532}
 --- !u!1 &1439852062
 GameObject:
@@ -2582,6 +2586,14 @@ MonoBehaviour:
   month: 7
   methane: 1925
   co2: 421
+  meanScaler:
+  - 6.5
+  - 1376.959
+  - 321.43283
+  deviationScaler:
+  - 3.4520526
+  - 326.40182
+  - 40.229282
 --- !u!4 &1842876287
 Transform:
   m_ObjectHideFlags: 0

@@ -202,7 +202,7 @@ public class JsonReadWriteSystem : MonoBehaviour
         //Debug.Log(s);
         Debug.Log(values["passages"].text);*/
 
-        chemin = "Assets/Scripts/JSON/TwineOrigin.json";
+        chemin = "Assets/Scripts/Dialogue/JSON/TwineOrigin.json";
         jsonString = File.ReadAllText(chemin);
         originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
         DisplayDialogue(originRoot.passages[0].text);
