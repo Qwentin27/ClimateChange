@@ -160,6 +160,7 @@ public class JsonReadWriteSystem : MonoBehaviour
     public void DisplayDialogue(string passageText)
     {
         //Debug.Log(passageText);
+        Debug.Log(passageText);
         string textToDisp = SortMessages(passageText);
         textDisplay.GetComponent<Text>().text = textToDisp;
     }
