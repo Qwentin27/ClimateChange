@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734bce8ec0f8db248a5be0cd6b196e02, type: 3}
   m_Name: CharacterDBHomme
   m_EditorClassIdentifier: 
-  character: []
+  character:
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 48203d671bd290e4d87e64bc06082453, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 1f1aac14632a77641af50353eeedfb7d, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 087ab4598ac435f48af807120f70a791, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: c30df6222b5c1074f868ebc428f8aeaf, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: d96467cae870b644c9bc3d1fb64d90c8, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: fdb017bd8ff5b314abab0c93e272fb89, type: 3}
