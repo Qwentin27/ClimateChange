@@ -19,4 +19,12 @@ public class CharacterDatabase : ScriptableObject
     {
         return character[index];
     }
+
+    public int IndexCharacter
+    {
+        get
+        {
+            return Random.Range(0,character.Length);
+        }
+    }
 }

@@ -70,5 +70,6 @@ public class CharacterManager : MonoBehaviour
         artworkSprite.sprite = character.characterSprite;
         imagePerso.sprite = character.characterSprite;
         nameText.text = character.characterName;
+        playerData.spritePerso = character.characterSprite;
     }
 }

@@ -7,4 +7,5 @@ using UnityEngine;
     {
         public int choixDuPerso;
         public int choixModeDeJeu;
+        public Sprite spritePerso;
     }

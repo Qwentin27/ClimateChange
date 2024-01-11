@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734bce8ec0f8db248a5be0cd6b196e02, type: 3}
+  m_Name: CharacterAleatoire
+  m_EditorClassIdentifier: 
+  character:
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 155bb0eb9102645489f0d70156e74655, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: b9d38a446a974a844aaab24636f31d44, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 36cb91f6de65581498811962de3f201b, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 71f3553389f15f04a9224ef0e6f7e83b, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 06d2f32512192a34181f99c0f3e15df6, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 1836919433dd689489d419ed441a98c1, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: 9359165339a5edf439ce457bede6ac43, type: 3}
+  - characterName: Homme
+    characterSprite: {fileID: 21300000, guid: fdb017bd8ff5b314abab0c93e272fb89, type: 3}
+  - characterName: NonBinaire
+    characterSprite: {fileID: 21300000, guid: f9c36b96bec55e54b87d98816f7f8866, type: 3}
+  - characterName: NonBinaire
+    characterSprite: {fileID: 21300000, guid: 8c9c4bcc650822c48a53a813be635bb7, type: 3}
+  - characterName: NonBinaire
+    characterSprite: {fileID: 21300000, guid: 1c0bc7cb77f9d5849abbdb2e8b199d65, type: 3}
+  - characterName: NonBinaire
+    characterSprite: {fileID: 21300000, guid: 1f88d36f1824031418c5513d8e8ac854, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 50653afa53e7b1e41832733c3c717106, type: 3}
+  - characterName: Femme
+    characterSprite: {fileID: 21300000, guid: 663d76bca1fa6c343b10fd62c73c1642, type: 3}
+  - characterName: NonBinaire
+    characterSprite: {fileID: 21300000, guid: 0456c61000e53cf4ab5d29c34e5319ef, type: 3}
