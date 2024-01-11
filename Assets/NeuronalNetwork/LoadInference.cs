@@ -50,7 +50,7 @@ public class LoadInference : MonoBehaviour {
         float globalTemp = output[0, 0];
         float seaLevel = output[0, 1];
 
-        Debug.Log($"Predicted Global Temp: {globalTemp}, Predicted Sea Level: {seaLevel}");
+        //Debug.Log($"Predicted Global Temp: {globalTemp}, Predicted Sea Level: {seaLevel}");
 
         GameManager.instance.temp = globalTemp;
         GameManager.instance.sealvl = seaLevel;

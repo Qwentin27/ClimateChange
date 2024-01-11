@@ -64,7 +64,7 @@ public class Box : MonoBehaviour
         Grid.current.TakeArea(areaTemp);
     }
 
-    public void replace()
+    public void Replace()
     {
         Destroy(gameObject);
     }

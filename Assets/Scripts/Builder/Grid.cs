@@ -20,9 +20,9 @@ public class Grid : MonoBehaviour
     public Tilemap MainTilemap;
     public Tilemap TempTilemap;
 
-    private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
+    private static readonly Dictionary<TileType, TileBase> tileBases = new();
 
-    private List<Box> boxes = new List<Box>();
+    private readonly List<Box> boxes = new();
     private Box temp;
     private Vector3 previousPos;
     private BoundsInt previousArea;
@@ -138,7 +138,7 @@ public class Grid : MonoBehaviour
 
         foreach (var v in area.allPositionsWithin)
         {
-            Vector3Int pos = new Vector3Int(v.x, v.y, 0);
+            Vector3Int pos = new(v.x, v.y, 0);
             array[counter] = tilemap.GetTile(pos);
             counter++;
         }
@@ -277,8 +277,8 @@ public class Grid : MonoBehaviour
         {
             if(b.area == area)
             {
-                b.replace();
                 bye = b;
+                b.Replace();
             }
         }
         boxes.Remove(bye);

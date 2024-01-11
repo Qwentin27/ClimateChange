@@ -724,7 +724,7 @@ MonoBehaviour:
         m_MethodName: InitializeWithBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8376632696017774566, guid: 6b2f06aabd068754bbd6fc24ccd6b0d8, type: 3}
+          m_ObjectArgument: {fileID: 8376632696017774566, guid: 59056bfea537dad4a98b1fe273d427f5, type: 3}
           m_ObjectArgumentAssemblyTypeName: Box, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1413,7 +1413,7 @@ MonoBehaviour:
         m_MethodName: InitializeWithBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: -4766251737833728036, guid: 83ec4a0c3d477604ea69bb0108dc1122, type: 3}
+          m_ObjectArgument: {fileID: -4766251737833728036, guid: 14dbf4a6468880347910a4210d805c94, type: 3}
           m_ObjectArgumentAssemblyTypeName: Box, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2073,12 +2073,12 @@ MonoBehaviour:
   size: {x: 10, y: 10}
   offset: {x: 1, y: 0.5}
   elementPrefab:
-  - {fileID: -4766251737833728036, guid: 83ec4a0c3d477604ea69bb0108dc1122, type: 3}
+  - {fileID: -4766251737833728036, guid: 14dbf4a6468880347910a4210d805c94, type: 3}
   - {fileID: 3888788674036235349, guid: 96b5ec06e28d4504ca2712d340df4d43, type: 3}
-  - {fileID: 5617125772758072336, guid: 81439eb7b211b96418d4973368f2bf17, type: 3}
+  - {fileID: 5617125772758072336, guid: 4a887f08dca007b4f957ac491529b425, type: 3}
   - {fileID: 6067407497467319205, guid: 478080d295c95514b9fd8c51944c289a, type: 3}
-  - {fileID: -780817993455826259, guid: 182505dff990d8b418fd64b01017efdb, type: 3}
   - {fileID: -1216314135052018707, guid: 4cb2927be4a2adf4483badc378d3bd49, type: 3}
+  - {fileID: -1216314135052018707, guid: 8214ac1b6c5f8974e8fc8f267f7fb5bd, type: 3}
   root: {fileID: 1230283493}
   gridLayout: {fileID: 581322419}
   MainTilemap: {fileID: 1952659886}
@@ -2592,7 +2592,7 @@ MonoBehaviour:
         m_MethodName: InitializeWithBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: -6151741785908966642, guid: 818412c7ae18b92409b9e0625b625e8e, type: 3}
+          m_ObjectArgument: {fileID: -6151741785908966642, guid: b680a14a57f4b9e4bab9441584e5d0a7, type: 3}
           m_ObjectArgumentAssemblyTypeName: Box, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2876,7 +2876,7 @@ MonoBehaviour:
         m_MethodName: InitializeWithBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5617125772758072336, guid: 81439eb7b211b96418d4973368f2bf17, type: 3}
+          m_ObjectArgument: {fileID: 5617125772758072336, guid: 4a887f08dca007b4f957ac491529b425, type: 3}
           m_ObjectArgumentAssemblyTypeName: Box, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

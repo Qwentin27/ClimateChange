@@ -44,11 +44,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 649585948048893716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c0a0f83f56bf79429a237af256f05e4, type: 3}
+  m_Script: {fileID: 11500000, guid: d7fed6369c9888e41905e1f65d04368a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   t: 3
-  level: 1
+  level: 0
   area:
     m_Position: {x: 0, y: 0, z: 0}
     m_Size: {x: 1, y: 1, z: 1}
