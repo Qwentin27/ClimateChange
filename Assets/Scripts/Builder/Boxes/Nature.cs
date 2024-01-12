@@ -14,31 +14,30 @@ public class Nature : Box
     private void Awake()
     {
         this.t = BoxType.NATURE;
-        this.level = 1;
         done = false;
         i = Random.Range(0, 2);
     }
 
     void Update()
     {
-        if (GameManager.instance.getTurn() > turn)
+        if (GameManager.instance.GetTurn() > turn)
         {
             turn++;
             level++;
-            if(i == 0 && level >= 2)
+            if(i == 0 && level >= 1)
             {
-                GameManager.instance.changeCO2(-Random.Range(0.5f, 1.33f));
+                GameManager.instance.ChangeCO2(-Random.Range(0.5f, 1.33f));
             }
         }
-        if (level == 2 && !done && i == 0)
+        if (level == 1 && !done && i == 0)
         {
             model1.SetActive(false);
             model2.SetActive(true);
-            GameManager.instance.changePopularity(1);
+            GameManager.instance.ChangePopularity(1);
             done = true;
         }
 
-        if (level == 2 && !done && i == 1)
+        if (level == 1 && !done && i == 1)
         {
             model1.SetActive(false);
             model3.SetActive(true);

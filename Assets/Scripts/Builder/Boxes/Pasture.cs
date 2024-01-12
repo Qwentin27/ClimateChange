@@ -12,26 +12,26 @@ public class Pasture : Box
     private void Awake()
     {
         this.t = BoxType.AGRICULTURE;
-        this.level = 1;
         done = false;
     }
 
     void Update()
     {
-        if (GameManager.instance.getTurn() > turn)
+        if (GameManager.instance.GetTurn() > turn)
         {
             turn++;
             level++;
-            if(level >= 2)
+            if(level >= 1)
             {
-                GameManager.instance.changeCH4(Random.Range(0.54f, 0.62f));
+                GameManager.instance.ChangeCH4(Random.Range(0.54f, 0.62f));
+                GameManager.instance.ChangeMoney(1);
             }
         }
-        if (level == 2 && !done)
+        if (level == 1 && !done)
         {
             model1.SetActive(false);
             model2.SetActive(true);
-            GameManager.instance.changePopularity(1);
+            GameManager.instance.ChangePopularity(1);
             done = true;
         }
     }

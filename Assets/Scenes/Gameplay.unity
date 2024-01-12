@@ -475,17 +475,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: 1
-  month: 0
+  month: 1
   monthText: {fileID: 173395605}
-  co2: 0
+  co2: 290
   co2Text: {fileID: 1908001941}
-  ch4: 0
+  ch4: 800
   ch4Text: {fileID: 290001598}
   temp: 0
   tempText: {fileID: 1671542704}
   sealvl: 0
   sealvlText: {fileID: 398014900}
-  popularity: 50
+  popularity: 1
+  money: 100
 --- !u!4 &81810920
 Transform:
   m_ObjectHideFlags: 0
@@ -1413,7 +1414,7 @@ MonoBehaviour:
         m_MethodName: InitializeWithBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: -4766251737833728036, guid: 14dbf4a6468880347910a4210d805c94, type: 3}
+          m_ObjectArgument: {fileID: 8833644126697350381, guid: 14dbf4a6468880347910a4210d805c94, type: 3}
           m_ObjectArgumentAssemblyTypeName: Box, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2073,7 +2074,7 @@ MonoBehaviour:
   size: {x: 10, y: 10}
   offset: {x: 1, y: 0.5}
   elementPrefab:
-  - {fileID: -4766251737833728036, guid: 14dbf4a6468880347910a4210d805c94, type: 3}
+  - {fileID: 8833644126697350381, guid: 14dbf4a6468880347910a4210d805c94, type: 3}
   - {fileID: 3888788674036235349, guid: 96b5ec06e28d4504ca2712d340df4d43, type: 3}
   - {fileID: 5617125772758072336, guid: 4a887f08dca007b4f957ac491529b425, type: 3}
   - {fileID: 6067407497467319205, guid: 478080d295c95514b9fd8c51944c289a, type: 3}
@@ -4404,7 +4405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1350143138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4711,7 +4712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1474113167
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5836,7 +5837,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1842876288}
         m_TargetAssemblyTypeName: LoadInference, Assembly-CSharp
-        m_MethodName: nextTurn
+        m_MethodName: NextTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

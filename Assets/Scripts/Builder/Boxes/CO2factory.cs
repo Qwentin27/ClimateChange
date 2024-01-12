@@ -12,28 +12,27 @@ public class CO2factory : Box
     private void Awake()
     {
         this.t = BoxType.FACTORY;
-        this.level = 1;
         this.done = false;
     }
 
     void Update()
     {
-        if (GameManager.instance.getTurn() > turn)
+        if (GameManager.instance.GetTurn() > turn)
         {
             turn++;
             level++;
-            if (level >= 3)
+            if (level >= 2)
             {
-                GameManager.instance.changeCO2(-Random.Range(1.98f, 11.55f));
+                GameManager.instance.ChangeCO2(-Random.Range(1.98f, 11.55f));
             }
         }
-        if (level == 2 && !done)
+        if (level == 1 && !done)
         {
             model1.SetActive(false);
             model2.SetActive(true);
             done = true;
         }
-        if (level == 3 && done)
+        if (level == 2 && done)
         {
             model2.SetActive(false);
             model3.SetActive(true);

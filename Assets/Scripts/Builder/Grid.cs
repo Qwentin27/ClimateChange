@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class Grid : MonoBehaviour
 {
@@ -168,7 +170,7 @@ public class Grid : MonoBehaviour
 
     public void InitializeWithBuilding(Box building)
     {
-        if (GameManager.instance.button)
+        if (GameManager.instance.button/* && (GameManager.instance.money >= building.price)*/)
         {
             temp = Instantiate(building, Vector3.zero, Quaternion.identity, root).GetComponent<Box>();
             temp.transform.localScale = new Vector3(3, (float)2.75, 1);
@@ -242,11 +244,17 @@ public class Grid : MonoBehaviour
     public bool CanTakeArea(BoundsInt area)
     {
         TileBase[] baseArray = GetTilesBlock(area, TempTilemap);
-        foreach (var b in baseArray)
+        foreach (var t in baseArray)
         {
-            if (b != tileBases[TileType.AGRICULTURE])
+            if (t != tileBases[TileType.AGRICULTURE])
             {
-                Debug.Log("Cannot place here");
+                return false;
+            }
+        }
+        foreach (Box b in boxes)
+        {
+            if (b.area == area && b.level < 1 && b.t == Box.BoxType.NATURE)
+            {
                 return false;
             }
         }
@@ -256,16 +264,17 @@ public class Grid : MonoBehaviour
 
     public void TakeArea(BoundsInt area)
     {
+        GameManager.instance.ChangeMoney(-temp.price);
         SetTilesBlock(area, TempTilemap, TileType.FINAL);
         if(temp.t == Box.BoxType.FACTORY)
         {
             SetTilesBlock(area, MainTilemap, TileType.FACTORY);
-            GameManager.instance.changePopularity(-1);
+            GameManager.instance.ChangePopularity(-1);
         }
         if (temp.t == Box.BoxType.AGRICULTURE)
         {
             SetTilesBlock(area, MainTilemap, TileType.AGRICULTURE);
-            GameManager.instance.changePopularity(1);
+            GameManager.instance.ChangePopularity(1);
         }
         if (temp.t == Box.BoxType.NATURE)
         {

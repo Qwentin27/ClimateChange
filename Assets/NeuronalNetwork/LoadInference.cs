@@ -21,6 +21,7 @@ public class LoadInference : MonoBehaviour {
     void Start() {
         runtimeModel = ModelLoader.Load(modelAsset);
         worker = WorkerFactory.CreateWorker(runtimeModel);
+        Predict(GameManager.instance.month, GameManager.instance.ch4, GameManager.instance.co2);
     }
 
     void Update() {
@@ -29,9 +30,9 @@ public class LoadInference : MonoBehaviour {
         }
     }
     
-    public void nextTurn()
+    public void NextTurn()
     {
-        GameManager.instance.nextTurn();
+        GameManager.instance.NextTurn();
         Predict(GameManager.instance.month, GameManager.instance.ch4, GameManager.instance.co2);
     }
 

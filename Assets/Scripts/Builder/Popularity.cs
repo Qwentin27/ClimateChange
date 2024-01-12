@@ -8,12 +8,6 @@ public class Popularity : MonoBehaviour
     public GameObject model2;
     public GameObject model3;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -32,12 +26,12 @@ public class Popularity : MonoBehaviour
             transform.Translate(0, 1 * Time.deltaTime, 0);
             
         } 
-        if (GameManager.instance.popularity < 33)
+        if (transform.position.y < 33 * 0.0334)
         {
             model1.SetActive(false);
             model2.SetActive(false);
             model3.SetActive(true);
-        } else if (GameManager.instance.popularity < 66)
+        } else if (transform.position.y < 66 * 0.0334)
         {
             model1.SetActive(false);
             model2.SetActive(true);
