@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3098020975657271629}
-  - component: {fileID: -1216314135052018707}
+  - component: {fileID: 7978523592314128503}
   m_Layer: 0
   m_Name: FinalB
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1216314135052018707
+--- !u!114 &7978523592314128503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6396649028495800213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b3d008f674ab447b591930b5bcc139, type: 3}
+  m_Script: {fileID: 11500000, guid: 586ca33cf913cb84ab762bb1521e30ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   t: 2
   level: 0
   price: 0
+  index: 1
   area:
     m_Position: {x: 0, y: 0, z: 0}
     m_Size: {x: 1, y: 1, z: 1}

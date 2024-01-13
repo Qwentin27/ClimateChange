@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +12,7 @@ public class Grid : MonoBehaviour
 {
     public static Grid current;
 
-    public Vector2 size;
+    public Vector2Int size;
     public Vector2 offset;
 
     public Box[] elementPrefab;
@@ -57,37 +58,7 @@ public class Grid : MonoBehaviour
             tileBases.Add(TileType.AGRICULTURE, Resources.Load<TileBase>(tilePath + "green"));
         }
 
-        for (int i = 0; i < size.x; i++)
-        {
-            for(int j = 0; j < size.y; j++)
-            {
-                int x = i-4;
-                int y = j-4;
-
-                int index = Random.Range(0, elementPrefab.Length);
-                element = Instantiate(elementPrefab[index], root);
-                element.transform.position = new Vector3((x-y)*offset.x, (x+y)*offset.y, 0);
-                element.transform.localScale = new Vector3(3, (float) 2.75, 1);
-
-
-                element.area = new BoundsInt(new Vector3Int(x - 1, y - 1, 0), Vector3Int.one);
-
-                boxes.Add(element);
-                if (index == 0)
-                {
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x - 1, y - 1, 0), Vector3Int.one), MainTilemap, TileType.FACTORY);
-                } else if(index <= 2)
-                {
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x - 1, y - 1, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
-                } else if(index <= 3)
-                {
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x - 1, y - 1, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
-                } else
-                {
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x - 1, y - 1, 0), Vector3Int.one), MainTilemap, TileType.FINAL);
-                }
-            }
-        }
+        NewGame();
     }
 
     // Update is called once per frame
@@ -126,6 +97,93 @@ public class Grid : MonoBehaviour
             ClearArea();
             Destroy(temp.gameObject);
             GameManager.instance.button = true;
+        }
+    }
+
+    public void NewGame()
+    {
+        for (int i = 0; i < size.x; i++)
+        {
+            for (int j = 0; j < size.y; j++)
+            {
+                int x = i - 5;
+                int y = j - 5;
+
+                int index = Random.Range(0, elementPrefab.Length);
+                element = Instantiate(elementPrefab[index], root);
+                element.transform.position = new Vector3((x - y) * offset.x, (x + y + 2) * offset.y, 0);
+                element.transform.localScale = new Vector3(3, (float)2.75, 1);
+
+
+                element.area = new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one);
+
+                /*if (index == 0)
+                {
+                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.FACTORY);
+                } else*/
+                if (index <= 2)
+                {
+                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
+                }
+                else if (index <= 4)
+                {
+                    if (index == 4)
+                    {
+                        element.index = 1;
+                    }
+                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
+                }
+                else
+                {
+                    if (index == 6)
+                    {
+                        element.index = 1;
+                    }
+                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.FINAL);
+                }
+                boxes.Add(element);
+            }
+        }
+    }
+
+    public void LoadGrid()
+    {
+        string tilePath = @"Tiles/";
+        if (!tileBases.ContainsKey(TileType.FINAL))
+        {
+            tileBases.Add(TileType.FINAL, null);
+        }
+        if (!tileBases.ContainsKey(TileType.NATURE))
+        {
+            tileBases.Add(TileType.NATURE, Resources.Load<TileBase>(tilePath + "white"));
+        }
+        if (!tileBases.ContainsKey(TileType.FACTORY))
+        {
+            tileBases.Add(TileType.FACTORY, Resources.Load<TileBase>(tilePath + "red"));
+        }
+        if (!tileBases.ContainsKey(TileType.AGRICULTURE))
+        {
+            tileBases.Add(TileType.AGRICULTURE, Resources.Load<TileBase>(tilePath + "green"));
+        }
+
+        Box[] tiles = FindObjectsOfType<Box>();
+        foreach(Box tile in tiles)
+        {
+            if (tile.t == Box.BoxType.FACTORY)
+            {
+                SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.FACTORY);
+            } else if (tile.t == Box.BoxType.AGRICULTURE)
+            {
+                SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
+            }
+            else if (tile.t == Box.BoxType.NATURE)
+            {
+                SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
+            }
+            else
+            {
+                SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.FINAL);
+            }
         }
     }
 

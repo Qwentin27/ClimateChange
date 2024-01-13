@@ -11,27 +11,36 @@ public class GameManager : MonoBehaviour
 
     public bool button = true;
 
-    private int turn;
+    public int turn;
 
     public int month;
-    public TextMeshProUGUI monthText;
-
     public float co2;
-    public TextMeshProUGUI co2Text;
-
     public float ch4;
-    public TextMeshProUGUI ch4Text;
 
     public float temp;
-    public TextMeshProUGUI tempText;
-
     public float sealvl;
-    public TextMeshProUGUI sealvlText;
 
     public int popularity;
-
     public int money;
-    //public TextMeshProUGUI moneyText;
+
+    public int ch4Price;
+    public int co2Price;
+    public int fieldPrice;
+    public int pasturePrice;
+
+    public TextMeshProUGUI monthText;
+    public TextMeshProUGUI co2Text;
+    public TextMeshProUGUI ch4Text;
+
+    public TextMeshProUGUI tempText;
+    public TextMeshProUGUI sealvlText;
+
+    public TextMeshProUGUI moneyText;
+
+    public TextMeshProUGUI ch4PriceText;
+    public TextMeshProUGUI co2PriceText;
+    public TextMeshProUGUI fieldPriceText;
+    public TextMeshProUGUI pasturePriceText;
 
     private void Awake()
     {
@@ -51,6 +60,12 @@ public class GameManager : MonoBehaviour
         turn = 0;
         co2Text.text = co2.ToString();
         ch4Text.text = ch4.ToString();
+
+        co2PriceText.text = co2Price.ToString();
+        ch4PriceText.text = ch4Price.ToString();
+        fieldPriceText.text = fieldPrice.ToString();
+        pasturePriceText.text = pasturePrice.ToString();
+
         monthText.text = ((month % 12) + 1) + "/" + (1880 + ((month + 1) / 12));
     }
 
@@ -61,7 +76,7 @@ public class GameManager : MonoBehaviour
         co2Text.text = Math.Round(co2, 2).ToString();
         tempText.text = Math.Round(temp, 2).ToString();
         sealvlText.text = Math.Round(sealvl, 2).ToString();
-        //moneyText.text = money.ToString();
+        moneyText.text = money.ToString();
         monthText.text = ((month % 12) + 1) + "/" + (1880 + ((month + 1) / 12));
     }
 

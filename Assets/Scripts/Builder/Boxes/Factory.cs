@@ -6,7 +6,7 @@ public class Factory : Box
 {
     private void Awake()
     {
-        this.t = BoxType.FACTORY;
+        this.t = BoxType.AGRICULTURE;
     }
 
     // Update is called once per frame
@@ -14,7 +14,6 @@ public class Factory : Box
     {
         if (GameManager.instance.GetTurn() > turn)
         {
-            turn++;
             level++;
             if (this.t == BoxType.FACTORY)
             {
@@ -22,5 +21,6 @@ public class Factory : Box
                 GameManager.instance.ChangeMoney(5);
             }
         }
+        turn = GameManager.instance.GetTurn();
     }
 }

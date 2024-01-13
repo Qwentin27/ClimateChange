@@ -12,6 +12,7 @@ public class Pasture : Box
     private void Awake()
     {
         this.t = BoxType.AGRICULTURE;
+        this.price = GameManager.instance.pasturePrice;
         done = false;
     }
 
@@ -19,7 +20,6 @@ public class Pasture : Box
     {
         if (GameManager.instance.GetTurn() > turn)
         {
-            turn++;
             level++;
             if(level >= 1)
             {
@@ -27,6 +27,7 @@ public class Pasture : Box
                 GameManager.instance.ChangeMoney(1);
             }
         }
+        turn = GameManager.instance.GetTurn();
         if (level == 1 && !done)
         {
             model1.SetActive(false);

@@ -12,6 +12,7 @@ public class CO2factory : Box
     private void Awake()
     {
         this.t = BoxType.FACTORY;
+        this.price = GameManager.instance.co2Price;
         this.done = false;
     }
 
@@ -19,13 +20,13 @@ public class CO2factory : Box
     {
         if (GameManager.instance.GetTurn() > turn)
         {
-            turn++;
             level++;
             if (level >= 2)
             {
                 GameManager.instance.ChangeCO2(-Random.Range(1.98f, 11.55f));
             }
         }
+        turn = GameManager.instance.GetTurn();
         if (level == 1 && !done)
         {
             model1.SetActive(false);

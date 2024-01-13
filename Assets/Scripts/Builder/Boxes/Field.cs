@@ -11,6 +11,7 @@ public class Field : Box
     private void Awake()
     {
         this.t = BoxType.AGRICULTURE;
+        this.price = GameManager.instance.fieldPrice;
         done = false;
     }
 
@@ -18,7 +19,6 @@ public class Field : Box
     {
         if (GameManager.instance.GetTurn() > turn)
         {
-            turn++;
             level++;
             if(level >= 1)
             {
@@ -26,7 +26,8 @@ public class Field : Box
                 GameManager.instance.ChangeMoney(1);
             }
         }
-        if(level == 1 && !done)
+        turn = GameManager.instance.GetTurn();
+        if (level == 1 && !done)
         {
             model1.SetActive(false);
             model2.SetActive(true);

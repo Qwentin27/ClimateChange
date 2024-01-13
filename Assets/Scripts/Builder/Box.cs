@@ -11,6 +11,7 @@ public class Box : MonoBehaviour
     public BoxType t;
     public int level;
     public int price;
+    public int index;
 
     public bool Placed { get; private set; }
     public BoundsInt area;
@@ -31,9 +32,9 @@ public class Box : MonoBehaviour
     {
         if (GameManager.instance.GetTurn() > turn)
         {
-            turn++;
             level++;
         }
+        turn = GameManager.instance.GetTurn();
     }
 
     #endregion
