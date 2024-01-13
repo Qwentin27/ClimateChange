@@ -214,11 +214,13 @@ public class LevelData : ScriptableObject
             Spawn(gameData.prefabBoxes[5 + natureData[i].index], parentBox, natureData[i]);
         }
 
+        Transform backBox = CreateParentTransform("== BACK ==");
+
         // Final Tiles
         DestroyCustom<Final>();
         for (int i = 0; i < finalData.Length; i++)
         {
-            Spawn(gameData.prefabBoxes[7 + finalData[i].index], parentBox, finalData[i]);
+            Spawn(gameData.prefabBoxes[7 + finalData[i].index], backBox, finalData[i]);
             
         }
 

@@ -15,9 +15,15 @@ public class Grid : MonoBehaviour
     public Vector2Int size;
     public Vector2 offset;
 
-    public Box[] elementPrefab;
     private Box element;
+
+    [Header("Interactive")]
+    public Box[] elementPrefab;
     public Transform root;
+
+    [Header("Final")]
+    public Box[] backgroundPrefab;
+    public Transform backRoot;
 
     public GridLayout gridLayout;
     public Tilemap MainTilemap;
@@ -100,14 +106,55 @@ public class Grid : MonoBehaviour
         }
     }
 
+    public void SetBlock(int x, int y, int i)
+    {
+        element = Instantiate(backgroundPrefab[i], backRoot);
+        element.transform.position = new Vector3((x - y) * offset.x, (x + y + 2) * offset.y, 0);
+        element.transform.localScale = new Vector3(3, (float)2.75, 1);
+        element.area = new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one);
+    }
+
     public void NewGame()
     {
+        for(int i = 0; i < size.x + 2; i++)
+        {
+            for(int j = 0; j < size.y +2; j++)
+            {
+                int x = i - 5;
+                int y = j - 5;
+
+                if ((i < 1 && j < 1) || (i > size.x && j > size.y) || (i < 1 && j > size.y) || (i > size.x && j < 1))
+                {
+                    SetBlock(x, y, 2);
+                } else if ((i < 1) || (i > size.x))
+                {
+                    SetBlock(x, y, 4);
+                } else if ((j < 1) || (j > size.y))
+                {
+                    SetBlock(x, y, 3);
+                }
+            }
+        }
+        for (int i = 0; i < size.x + 10; i++)
+        {
+            for (int j = 0; j < size.y + 10; j++)
+            {
+                int x = i - 9;
+                int y = j - 9;
+
+                if ((i < 4 || j < 4) || (i > size.x + 5 || j > size.y + 5))
+                {
+                    int index = Random.Range(0, 2);
+                    SetBlock(x, y, index);
+                }
+            }
+        }
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
-                int x = i - 5;
-                int y = j - 5;
+                int x = i - 4;
+                int y = j - 4;
 
                 int index = Random.Range(0, elementPrefab.Length);
                 element = Instantiate(elementPrefab[index], root);
@@ -125,21 +172,13 @@ public class Grid : MonoBehaviour
                 {
                     SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
                 }
-                else if (index <= 4)
+                else
                 {
                     if (index == 4)
                     {
                         element.index = 1;
                     }
                     SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
-                }
-                else
-                {
-                    if (index == 6)
-                    {
-                        element.index = 1;
-                    }
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.FINAL);
                 }
                 boxes.Add(element);
             }
@@ -291,6 +330,17 @@ public class Grid : MonoBehaviour
                     SetTilesBlock(buildingArea, TempTilemap, TileType.FACTORY);
                     previousArea = buildingArea;
                     return;
+                } else
+                {
+                    foreach(Box b in boxes)
+                    {
+                        if(b.area.position == buildingArea.position && b.level < 1)
+                        {
+                            SetTilesBlock(buildingArea, TempTilemap, TileType.FACTORY);
+                            previousArea = buildingArea;
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -305,13 +355,6 @@ public class Grid : MonoBehaviour
         foreach (var t in baseArray)
         {
             if (t != tileBases[TileType.AGRICULTURE])
-            {
-                return false;
-            }
-        }
-        foreach (Box b in boxes)
-        {
-            if (b.area == area && b.level < 1 && b.t == Box.BoxType.NATURE)
             {
                 return false;
             }

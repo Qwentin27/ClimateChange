@@ -11,9 +11,9 @@ public class Popularity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y > ((GameManager.instance.popularity - 2) * 0.0334))
+        if(transform.position.y - 0.5 > ((GameManager.instance.popularity - 2) * 0.0334))
         {
-            if (transform.position.y < ((GameManager.instance.popularity + 2) * 0.0334))
+            if (transform.position.y - 0.5 < ((GameManager.instance.popularity + 2) * 0.0334))
             {
                 transform.Translate(0, 0, 0);
 
@@ -26,12 +26,12 @@ public class Popularity : MonoBehaviour
             transform.Translate(0, 1 * Time.deltaTime, 0);
             
         } 
-        if (transform.position.y < 33 * 0.0334)
+        if (transform.position.y - 0.5 < 33 * 0.0334)
         {
             model1.SetActive(false);
             model2.SetActive(false);
             model3.SetActive(true);
-        } else if (transform.position.y < 66 * 0.0334)
+        } else if (transform.position.y - 0.5 < 66 * 0.0334)
         {
             model1.SetActive(false);
             model2.SetActive(true);
