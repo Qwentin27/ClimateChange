@@ -8022,7 +8022,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ab7e566f31ce69f47a83d410575c5a48, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 3
+  m_Pitch: 2
   Loop: 0
   Mute: 0
   Spatialize: 0
