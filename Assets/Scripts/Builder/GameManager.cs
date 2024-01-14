@@ -6,11 +6,13 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Profiling;
+using UnityEngine.SceneManagement;
 using static UnityEngine.ParticleSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public JsonReadWriteSystem instanceJson;
     public GameData gameData;
 
     public bool button = true;
@@ -71,14 +73,22 @@ public class GameManager : MonoBehaviour
         fieldPriceText.text = fieldPrice.ToString();
         pasturePriceText.text = pasturePrice.ToString();
 
-
         stats1 = new();
         stats2 = new();
+
+        if(!gameData.change)
+        {
+            instanceJson.LoadFromJson();
+        }
 }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameData.change)
+        {
+            Load();
+        }
         ch4Text.text = Math.Round(ch4, 2).ToString();
         co2Text.text = Math.Round(co2, 2).ToString();
         tempText.text = Math.Round(temp, 2).ToString();
@@ -112,11 +122,13 @@ public class GameManager : MonoBehaviour
             Debug.LogException(e);
         }
         gameData.levels[0].Save();
+        SceneManager.LoadScene(0);
     }
 
     public void Load()
     {
         gameData.levels[0].Load();
+        gameData.change = false;
     }
 
     public int GetTurn()

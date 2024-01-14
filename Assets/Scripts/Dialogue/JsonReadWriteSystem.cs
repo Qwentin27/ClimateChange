@@ -440,6 +440,9 @@ public class JsonReadWriteSystem : MonoBehaviour
         //Passage[] values = JsonHelper.getJsonArray<Passage>(jsonString);
         //Debug.Log(s);
         Debug.Log(values["passages"].text);*/
+        PanelDialogue.SetActive(true);
+        PanelPersonnage1.SetActive(true);
+        PanelPersonnage2.SetActive(true);
 
         chemin = "Assets/Scripts/Dialogue/JSON/TwineOrigin.json";
         jsonString = File.ReadAllText(chemin);
