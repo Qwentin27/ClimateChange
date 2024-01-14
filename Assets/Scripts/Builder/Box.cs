@@ -12,6 +12,7 @@ public class Box : MonoBehaviour
     public int level;
     public int price;
     public int index;
+    public bool upgrade;
 
     public bool Placed { get; private set; }
     public BoundsInt area;

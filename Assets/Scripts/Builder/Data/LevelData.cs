@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,6 +14,7 @@ public class LevelData : ScriptableObject
     public GameData gameData;
 
     public ManagerData managerData;
+    public CharacterData characterData;
 
     public BoxData[] factoryData;
     public BoxData[] fieldData;
@@ -25,6 +29,9 @@ public class LevelData : ScriptableObject
         GameManager x = FindObjectOfType<GameManager>();
         managerData = new ManagerData(x.turn, x.month, x.co2, x.ch4, x.temp, x.sealvl, x.popularity, x.money, x.ch4Price, x.co2Price, x.fieldPrice, x.pasturePrice, x.stats1, x.stats2);
 
+        CharacterInGame y = FindObjectOfType<CharacterInGame>();
+        characterData = new CharacterData(y.playerData, y.character, y.character2, y.characterAleatoire, y.index);
+
         // Chercher objets de type Factory
         Factory[] factories = FindObjectsOfType<Factory>();
 
@@ -32,7 +39,7 @@ public class LevelData : ScriptableObject
         factoryData = new BoxData[factories.Length];
         for (int i=0; i<factoryData.Length; i++)
         {
-            factoryData[i] = new BoxData(factories[i].transform, factories[i].area, factories[i].level, factories[i].index) ;
+            factoryData[i] = new BoxData(factories[i].transform, factories[i].area, factories[i].level, factories[i].index, factories[i].upgrade) ;
         }
 
         // Chercher objets de type Field
@@ -42,7 +49,7 @@ public class LevelData : ScriptableObject
         fieldData = new BoxData[fields.Length];
         for (int i = 0; i < fieldData.Length; i++)
         {
-            fieldData[i] = new BoxData(fields[i].transform, fields[i].area, fields[i].level, fields[i].index);
+            fieldData[i] = new BoxData(fields[i].transform, fields[i].area, fields[i].level, fields[i].index, fields[i].upgrade);
         }
 
         // Chercher objets de type Pasture
@@ -52,7 +59,7 @@ public class LevelData : ScriptableObject
         pastureData = new BoxData[pastures.Length];
         for (int i = 0; i < pastureData.Length; i++)
         {
-            pastureData[i] = new BoxData(pastures[i].transform, pastures[i].area, pastures[i].level, pastures[i].index);
+            pastureData[i] = new BoxData(pastures[i].transform, pastures[i].area, pastures[i].level, pastures[i].index, pastures[i].upgrade);
         }
 
         // Chercher objets de type CO2factory
@@ -62,7 +69,7 @@ public class LevelData : ScriptableObject
         co2Data = new BoxData[cO2Factories.Length];
         for (int i = 0; i < co2Data.Length; i++)
         {
-            co2Data[i] = new BoxData(cO2Factories[i].transform, cO2Factories[i].area, cO2Factories[i].level, cO2Factories[i].index);
+            co2Data[i] = new BoxData(cO2Factories[i].transform, cO2Factories[i].area, cO2Factories[i].level, cO2Factories[i].index, cO2Factories[i].upgrade);
         }
 
         // Chercher objets de type CH4factory
@@ -71,7 +78,7 @@ public class LevelData : ScriptableObject
         // Sauvegarder leurs positions, rotation et scales
         ch4Data = new BoxData[cH4Factories.Length];
         for (int i = 0;i < ch4Data.Length; i++) { 
-            ch4Data[i] = new BoxData(cH4Factories[i].transform, cH4Factories[i].area, cH4Factories[i].level, cH4Factories[i].index);
+            ch4Data[i] = new BoxData(cH4Factories[i].transform, cH4Factories[i].area, cH4Factories[i].level, cH4Factories[i].index, cH4Factories[i].upgrade);
         }
 
         // Chercher objets de type Nature
@@ -81,7 +88,7 @@ public class LevelData : ScriptableObject
         natureData = new BoxData[natures.Length];
         for (int i = 0; i < natures.Length; i++)
         {
-            natureData[i] = new BoxData(natures[i].transform, natures[i].area, natures[i].level, natures[i].index);
+            natureData[i] = new BoxData(natures[i].transform, natures[i].area, natures[i].level, natures[i].index, natures[i].upgrade);
         }
 
         // Chercher objets de type Final
@@ -91,7 +98,7 @@ public class LevelData : ScriptableObject
         finalData = new BoxData[finals.Length];
         for(int i = 0; i < finals.Length; i++)
         {
-            finalData[i] = new BoxData(finals[i].transform, finals[i].area, finals[i].level, finals[i].index);
+            finalData[i] = new BoxData(finals[i].transform, finals[i].area, finals[i].level, finals[i].index, finals[i].upgrade);
         }
 
         EditorUtility.SetDirty(this); // force la save
@@ -131,7 +138,7 @@ public class LevelData : ScriptableObject
         Box g;
         g = Instantiate(prefab, parent);
         SetTransformData(g, transData.transformData);
-        SetBoxData(g, transData.area, transData.level);
+        SetBoxData(g, transData.area, transData.level, transData.upgrade);
         return g;
     }
 
@@ -141,15 +148,16 @@ public class LevelData : ScriptableObject
         g.transform.localScale = transData.scale;
     }
 
-    private void SetBoxData(Box g, BoundsInt zone, int lvl)
+    private void SetBoxData(Box g, BoundsInt zone, int lvl, bool u)
     {
         g.area = zone;
         g.level = lvl;
+        g.upgrade = u;
     }
 
     /// <summary>
-    /// Supprimer les �lements pr�sents dans la sc�ne !
-    /// Cr�ation des parents et instancie les �lements !
+    /// Supprimer les  lements pr sents dans la sc ne !
+    /// Cr ation des parents et instancie les  lements !
     /// </summary>
     public void Load()
     {
@@ -168,6 +176,13 @@ public class LevelData : ScriptableObject
         m.fieldPrice = managerData.fieldPrice;
         m.stats1 = managerData.stats1;
         m.stats2 = managerData.stats2;
+
+        CharacterInGame c = FindObjectOfType<CharacterInGame>();
+        c.playerData = characterData.playerData;
+        c.character.sprite = c.playerData.spritePerso;
+        c.index = characterData.index;
+        c.characterAleatoire = characterData.characterAleatoire;
+        c.character2.sprite = c.characterAleatoire.GetCharacter(c.index).characterSprite;
 
         Transform parentBox = CreateParentTransform("== BOXES ==");
 

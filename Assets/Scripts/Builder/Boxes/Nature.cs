@@ -27,15 +27,13 @@ public class Nature : Box
             }
         }
         turn = GameManager.instance.GetTurn();
-        if (level == 1 && !done)
+        if (level >= 1 && !done)
         {
-            model1.SetActive(false);
-            model2.SetActive(true);
-            GameManager.instance.ChangePopularity(1);
-            done = true;
-        }
-        else if (level >= 1 && !done)
-        {
+            if (level == 1 && !upgrade)
+            {
+                GameManager.instance.ChangePopularity(1);
+                upgrade = true;
+            }
             model1.SetActive(false);
             model2.SetActive(true);
             done = true;

@@ -25,7 +25,7 @@ public class ManagerData
     public List<Vector3> stats1;
     public List<Vector4> stats2;
 
-    public ManagerData(int tu, int mont, float co, float ch, float te, float s, int p, int mone, int chp, int cop, int fp, int pp, List<Vector3> s1, List<Vector4> s2)
+    public ManagerData(int tu, int mont, float co, float ch, float te, float s, int pop, int mone, int chp, int cop, int fp, int pp, List<Vector3> s1, List<Vector4> s2)
     {
         this.turn = tu;
         this.month = mont;
@@ -33,7 +33,7 @@ public class ManagerData
         this.ch4 = ch;
         this.temp = te;
         this.sealvl = s;
-        this.popularity = p;
+        this.popularity = pop;
         this.money = mone;
         this.ch4Price = chp;
         this.co2Price = cop;

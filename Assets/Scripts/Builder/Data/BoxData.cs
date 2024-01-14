@@ -9,12 +9,14 @@ public class BoxData
     public BoundsInt area;
     public int level;
     public int index;
+    public bool upgrade;
 
-    public BoxData(Transform trans, BoundsInt a, int lvl, int i)
+    public BoxData(Transform trans, BoundsInt a, int lvl, int i, bool u)
     {
         transformData = new TransformData(trans);
         area = a;
         level = lvl;
         index = i;
+        this.upgrade = u;
     }
 }
