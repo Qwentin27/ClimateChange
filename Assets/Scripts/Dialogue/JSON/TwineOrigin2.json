@@ -30,7 +30,7 @@
       "name": "suite 1",
       "pid": "2",
       "position": {
-        "x": "625",
+        "x": "750",
         "y": "400"
       }
     },
@@ -46,8 +46,8 @@
       "name": "suite 2",
       "pid": "3",
       "position": {
-        "x": "625",
-        "y": "525"
+        "x": "900",
+        "y": "550"
       }
     },
     {
@@ -62,8 +62,8 @@
       "name": "suite 3",
       "pid": "4",
       "position": {
-        "x": "625",
-        "y": "650"
+        "x": "600",
+        "y": "625"
       }
     },
     {
@@ -78,7 +78,7 @@
       "name": "suite 4",
       "pid": "5",
       "position": {
-        "x": "625",
+        "x": "775",
         "y": "775"
       }
     },
@@ -94,8 +94,8 @@
       "name": "suite 5",
       "pid": "6",
       "position": {
-        "x": "625",
-        "y": "900"
+        "x": "975",
+        "y": "925"
       }
     },
     {
@@ -110,8 +110,8 @@
       "name": "suite 6",
       "pid": "7",
       "position": {
-        "x": "625",
-        "y": "1025"
+        "x": "650",
+        "y": "950"
       }
     },
     {
@@ -126,8 +126,8 @@
       "name": "suite 7",
       "pid": "8",
       "position": {
-        "x": "625",
-        "y": "1150"
+        "x": "825",
+        "y": "1100"
       }
     },
     {
@@ -142,8 +142,8 @@
       "name": "suite 8",
       "pid": "9",
       "position": {
-        "x": "625",
-        "y": "1275"
+        "x": "1025",
+        "y": "1225"
       }
     },
     {
@@ -158,8 +158,8 @@
       "name": "suite 9",
       "pid": "10",
       "position": {
-        "x": "625",
-        "y": "1400"
+        "x": "775",
+        "y": "1275"
       }
     },
     {
@@ -174,8 +174,8 @@
       "name": "suite 10",
       "pid": "11",
       "position": {
-        "x": "625",
-        "y": "1525"
+        "x": "600",
+        "y": "1400"
       }
     },
     {
@@ -190,8 +190,8 @@
       "name": "suite 11",
       "pid": "12",
       "position": {
-        "x": "625",
-        "y": "1650"
+        "x": "800",
+        "y": "1450"
       }
     },
     {
@@ -206,8 +206,8 @@
       "name": "suite 12",
       "pid": "13",
       "position": {
-        "x": "625",
-        "y": "1775"
+        "x": "1000",
+        "y": "1550"
       }
     },
     {
@@ -222,8 +222,8 @@
       "name": "suite 13",
       "pid": "14",
       "position": {
-        "x": "625",
-        "y": "1900"
+        "x": "800",
+        "y": "1650"
       }
     },
     {
@@ -239,7 +239,7 @@
       "pid": "15",
       "position": {
         "x": "625",
-        "y": "2025"
+        "y": "1750"
       }
     },
     {
@@ -254,8 +254,8 @@
       "name": "suite 15",
       "pid": "16",
       "position": {
-        "x": "625",
-        "y": "2150"
+        "x": "800",
+        "y": "1875"
       }
     },
     {
@@ -270,8 +270,8 @@
       "name": "suite 16",
       "pid": "17",
       "position": {
-        "x": "625",
-        "y": "2275"
+        "x": "1000",
+        "y": "2000"
       }
     },
     {
@@ -286,8 +286,8 @@
       "name": "suite 17",
       "pid": "18",
       "position": {
-        "x": "625",
-        "y": "2400"
+        "x": "775",
+        "y": "2075"
       }
     },
     {
@@ -302,8 +302,8 @@
       "name": "suite 18",
       "pid": "19",
       "position": {
-        "x": "625",
-        "y": "2525"
+        "x": "600",
+        "y": "2225"
       }
     },
     {
@@ -318,8 +318,8 @@
       "name": "suite 19",
       "pid": "20",
       "position": {
-        "x": "625",
-        "y": "2650"
+        "x": "800",
+        "y": "2375"
       }
     },
     {
@@ -334,8 +334,8 @@
       "name": "suite 20",
       "pid": "21",
       "position": {
-        "x": "625",
-        "y": "2775"
+        "x": "975",
+        "y": "2475"
       }
     },
     {
@@ -350,12 +350,12 @@
       "name": "suite 21",
       "pid": "22",
       "position": {
-        "x": "625",
-        "y": "2900"
+        "x": "775",
+        "y": "2550"
       }
     },
     {
-      "text": "Une première proposition est parvenue jusqu'au bureau : un vaisseau cargo en orbite autour de la Terre vous propose de prendre tout sa cargaison de déchets moyennant finances.|\n[[suite 23]]",
+      "text": "Une première proposition est parvenue jusqu'au bureau : un vaisseau cargo en orbite autour de la Terre vous propose de prendre toute sa cargaison de déchets moyennant finances.|\n[[suite 23]]",
       "links": [
         {
           "name": "suite 23",
@@ -366,8 +366,8 @@
       "name": "suite 22",
       "pid": "23",
       "position": {
-        "x": "625",
-        "y": "3025"
+        "x": "575",
+        "y": "2650"
       }
     },
     {
@@ -387,8 +387,8 @@
       "name": "suite 23",
       "pid": "24",
       "position": {
-        "x": "625",
-        "y": "3150"
+        "x": "775",
+        "y": "2775"
       }
     },
     {
@@ -397,16 +397,16 @@
       "pid": "25",
       "position": {
         "x": "625",
-        "y": "3275"
+        "y": "2975"
       }
     },
     {
-      "text": "Vous avez raison. Je pense qu'il vaut mieux décliner leur offre. Je leur envoie votre refus \net je vous vois plus tard.|",
+      "text": "Vous avez raison. Je pense qu'il vaut mieux décliner leur offre. Je leur envoie votre refus et je vous vois plus tard.|",
       "name": "Refuser",
       "pid": "26",
       "position": {
-        "x": "750",
-        "y": "3275"
+        "x": "850",
+        "y": "2975"
       }
     }
   ],
