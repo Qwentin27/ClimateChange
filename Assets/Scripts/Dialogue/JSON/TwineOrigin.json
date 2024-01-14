@@ -3,7 +3,7 @@
 {
   "passages": [
     {
-      "text": "Bonjour étranger !|\n[[suite 1]]",
+      "text": "Bien le bonjour madame la présidente !|\n[[suite 1]]",
       "links": [
         {
           "name": "suite 1",
@@ -11,15 +11,15 @@
           "pid": "2"
         }
       ],
-      "name": "Début de l'histoire",
+      "name": "Début du tuto",
       "pid": "1",
       "position": {
-        "x": "475",
-        "y": "100"
+        "x": "550",
+        "y": "225"
       }
     },
     {
-      "text": "Il fait beau aujourd'hui !|\n[[suite 2]]",
+      "text": "Vous voici dans votre nouveau bureau ! J'espère qu'il vous plaît.|\n[[suite 2]]",
       "links": [
         {
           "name": "suite 2",
@@ -30,12 +30,12 @@
       "name": "suite 1",
       "pid": "2",
       "position": {
-        "x": "600",
-        "y": "225"
+        "x": "550",
+        "y": "350"
       }
     },
     {
-      "text": "C'est un beau jour !|\n[[suite 3 et choix]]",
+      "text": "Je me présente, je serai votre secrétaire pour la durée de votre mandat. Nous allons donc passer pas mal de temps ensemble.|\n[[suite 3 et choix]]",
       "links": [
         {
           "name": "suite 3 et choix",
@@ -46,54 +46,54 @@
       "name": "suite 2",
       "pid": "3",
       "position": {
-        "x": "600",
-        "y": "375"
+        "x": "550",
+        "y": "475"
       }
     },
     {
-      "text": "Comment allez-vous ?|\n[[très bien et vous ?]]\n[[cela ne vous regarde pas]]",
+      "text": "Tout d'abord comment allez vous ?|\n[[Bien !]]\n[[Ma foi stressée]]",
       "links": [
         {
-          "name": "très bien et vous ?",
-          "link": "très bien et vous ?",
+          "name": "Bien !",
+          "link": "Bien !",
           "pid": "5"
         },
         {
-          "name": "cela ne vous regarde pas",
-          "link": "cela ne vous regarde pas",
+          "name": "Ma foi stressée",
+          "link": "Ma foi stressée",
           "pid": "6"
         }
       ],
       "name": "suite 3 et choix",
       "pid": "4",
       "position": {
-        "x": "600",
-        "y": "500"
+        "x": "550",
+        "y": "600"
       }
     },
     {
-      "text": "Bien !|",
-      "name": "très bien et vous ?",
+      "text": "Parfait ! C'est déjà un bon point !|\n",
+      "name": "Bien !",
       "pid": "5",
       "position": {
-        "x": "600",
-        "y": "625"
+        "x": "550",
+        "y": "725"
       }
     },
     {
-      "text": "Vous n'êtes pas très aimable !|",
-      "name": "cela ne vous regarde pas",
+      "text": "C'est tout à fait normal ! Après tout, vous êtes maintenant à la tête d'une colonie si ce n'est une planète après que la Terre ne soit plus devenue habitable. De vous à moi : je n'aimerai pas être à votre place.|\n",
+      "name": "Ma foi stressée",
       "pid": "6",
       "position": {
-        "x": "725",
-        "y": "625"
+        "x": "675",
+        "y": "725"
       }
     }
   ],
-  "name": "Tuto - projet Climat",
+  "name": "Tuto - Green Healthy Planet",
   "startnode": "1",
   "creator": "Twine",
   "creator-version": "2.8.0",
-  "ifid": "BD7FF700-B039-4F90-B4FA-A7B958DA93EC"
+  "ifid": "2CD4163E-9C37-45A8-927D-E8AEAD4093D7"
 }
 

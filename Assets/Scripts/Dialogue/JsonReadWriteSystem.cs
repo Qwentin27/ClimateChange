@@ -11,9 +11,13 @@ using Button = UnityEngine.UI.Button;
 public class JsonReadWriteSystem : MonoBehaviour
 {
     public string chemin, jsonString;
+    public GameObject PanelDialogue;
+    public GameObject PanelPersonnage2;
     public GameObject textDisplay;
     public GameObject ChoiceButton1, ChoiceButton2;
-    public Button btn1, btn2;
+    public GameObject FollowingButton;
+    public Button btn1, btn2, btnf;
+    public bool endGame;
     public int actualNode;
     public int indexPassage = 0;
     public int indexSort;
@@ -34,8 +38,10 @@ public class JsonReadWriteSystem : MonoBehaviour
     {
         btn1 = ChoiceButton1.GetComponent<Button>();
         btn2 = ChoiceButton2.GetComponent<Button>();
+        btnf = FollowingButton.GetComponent<Button>();
         btn1.onClick.AddListener(ChoiceClick1);
         btn2.onClick.AddListener(ChoiceClick2);
+        btnf.onClick.AddListener(followingMessage);
         /*List<(int, int)> keys = new List<(int, int)>(dictNodes.Keys);
         Debug.Log(keys.Count);
         queueMessages.Enqueue(keys[0]);
@@ -54,9 +60,14 @@ public class JsonReadWriteSystem : MonoBehaviour
         }*/
     }
 
+    public void followingMessage()
+    {
+        LaunchDiscussion();
+    }
+
     public void LaunchDiscussion()
     {
-        foreach (List<int> element in queueMessages.ToList())
+        /*foreach (List<int> element in queueMessages.ToList())
         {
             //Debug.Log(queueMessages.Dequeue());
 
@@ -76,28 +87,61 @@ public class JsonReadWriteSystem : MonoBehaviour
             /*List<int> l = new List<int> { 1, 2 };
             queueMessages.Enqueue(dictNodes.Keys.FirstOrDefault(x => x == l));*/
 
+        if (queueMessages.Count != 0)
+        {
+            List<int> element = queueMessages.Dequeue();
+            if (element[0] == 1)
+            {
+                DisplayDialogue(dictPassages[element[0]]);
+            }
+            else
+            {
+                if (element[1] == 0)
+                {
+                    DisplayDialogue(dictPassages[element[0]]);
+                }
+                else if (element[1] == 1 || element[1] == 2)
+                {
+                    DisplayDialogue(dictPassages[element[0]]);
+                    DisplayChoices(dictResponses[element[0]][0], dictResponses[element[0]][1]);
+                    actualNode = element[0];
+                }
+            }
+
+            
         }
+        else
+        {
+            if (endGame)
+            {
+                PanelDialogue.SetActive(false);
+                PanelPersonnage2.SetActive(false);
+            }
+        }
+
     }
+       
 
     public void UpdateQueue(int n)
     {
         bool nodeFlag = false;
         bool choiceFlag = true;
-        bool end = false;
+        endGame = false;
         Passage foundPassage = originRoot.passages.First(passage => (passage.pid == "" + (n)));
 
         foreach (KeyValuePair<List<int>, int> item in dictNodes)
-        {
+        {   
             if (foundPassage.links == null)
             {
-                end = true;
+                endGame = true;
                 DisplayDialogue(dictPassages[n]);
             }
             else
-            {
+            { 
                 if (item.Key[0] == n)
                 {
                     nodeFlag = true;
+                    DisplayDialogue(dictPassages[n]);
                 }
 
                 if (nodeFlag && choiceFlag)
@@ -105,24 +149,22 @@ public class JsonReadWriteSystem : MonoBehaviour
                     queueMessages.Enqueue(item.Key);
                 }
 
+                Debug.Log("Le passage a un PID de : " + n + " et nodeFlag : " + nodeFlag + " et choiceFlag : " + choiceFlag);
                 if (item.Key[1] != 0)
-                {
+                {   
                     choiceFlag = false;
                 }
+
+
             }
             
         }
         Debug.Log(queueMessages.Count);
-        if (!end)
+        /*if (end)
         {
-            LaunchDiscussion();
-        }
+            // après le bouton suite, cacher tout le truc des messages
+        }*/
         
-    }
-
-    public void WriteInJson() // gestion évènements
-    {
-
     }
 
     public void test(string jsonString)
@@ -289,23 +331,33 @@ public class JsonReadWriteSystem : MonoBehaviour
         nodeList.Add(actualNode);
         nodeList.Add(1);
         int newNode = dictNodes[nodeList];*/
-        Debug.Log(actualNode);
-        Debug.Log(SearchPidNewPassageThroughChoice(actualNode));
-        UpdateQueue(SearchPidNewPassageThroughChoice(actualNode));
+        Debug.Log("Noeud actuel : " + actualNode);
+        Debug.Log(SearchPidNewPassageThroughChoice1(actualNode));
+        ChoiceButton1Text.GetComponent<TMPro.TMP_Text>().text = "";
+        ChoiceButton2Text.GetComponent<TMPro.TMP_Text>().text = "";
+        UpdateQueue(SearchPidNewPassageThroughChoice1(actualNode));
     }
 
-    public int SearchPidNewPassageThroughChoice(int n)
+    public int SearchPidNewPassageThroughChoice1(int n)
     {
         Passage foundPassage = originRoot.passages.First(passage => (passage.pid == "" + (n)));
         return (int.Parse(foundPassage.links[0].pid));
     }
 
+    public int SearchPidNewPassageThroughChoice2(int n)
+    {
+        Passage foundPassage = originRoot.passages.First(passage => (passage.pid == "" + (n)));
+        return (int.Parse(foundPassage.links[1].pid));
+    }
+
+
     public void ChoiceClick2() // le joueur a effectué le choix 2
     {
-        int indNewPassage = SearchIndexNewPassageThroughChoice(originRoot, indexPassage, 1); //int.Parse(originRoot.passages[indexPassage].links[1].pid);
-        //Debug.Log(indNewPassage);
-        DisplayDialogue(originRoot.passages[indNewPassage].text);
-
+        Debug.Log("Noeud actuel : " + actualNode);
+        Debug.Log(SearchPidNewPassageThroughChoice2(actualNode));
+        ChoiceButton1Text.GetComponent<TMPro.TMP_Text>().text = "";
+        ChoiceButton2Text.GetComponent<TMPro.TMP_Text>().text = "";
+        UpdateQueue(SearchPidNewPassageThroughChoice2(actualNode));
     }
 
     public int SearchIndexNewPassageThroughChoice(Root root, int indP, int choice)
@@ -413,6 +465,7 @@ public class JsonReadWriteSystem : MonoBehaviour
         Debug.Log(queueMessages.Count);*/
 
         UpdateQueue(1);
+        LaunchDiscussion();
         //Debug.Log(queueMessages.Count);
 
         /*if (queueMessages.Count > 0)
