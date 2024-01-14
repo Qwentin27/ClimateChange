@@ -23,7 +23,7 @@ public class CO2factory : Box
             level++;
             if (level >= 2)
             {
-                GameManager.instance.ChangeCO2(-Random.Range(1.98f, 11.55f));
+                GameManager.instance.ChangeCO2(-Random.Range(1.58f, 9.24f));
             }
         }
         turn = GameManager.instance.GetTurn();

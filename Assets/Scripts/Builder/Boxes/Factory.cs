@@ -17,6 +17,7 @@ public class Factory : Box
             level++;
             if (this.t == BoxType.FACTORY)
             {
+                GameManager.instance.ChangeCH4(Random.Range(1.98f, 11.55f));
                 GameManager.instance.ChangeCO2(Random.Range(1.98f, 11.55f));
                 GameManager.instance.ChangeMoney(5);
             }

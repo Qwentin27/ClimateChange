@@ -157,7 +157,8 @@ public class GameManager : MonoBehaviour
             turn++;
             month++;
 
-            ChangeCO2(UnityEngine.Random.Range(37.33f, 186.66f));
+            ChangeCH4(UnityEngine.Random.Range(1f, 5f));
+            ChangeCO2(UnityEngine.Random.Range(2f, 10f));
             if (money < 0) ChangePopularity(-10);
             if (temp > 1.5) ChangePopularity(-10);
         }
