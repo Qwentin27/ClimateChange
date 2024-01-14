@@ -22,7 +22,10 @@ public class ManagerData
     public int fieldPrice;
     public int pasturePrice;
 
-    public ManagerData(int tu, int mont, float co, float ch, float te, float s, int p, int mone, int chp, int cop, int fp, int pp)
+    public List<Vector3> stats1;
+    public List<Vector4> stats2;
+
+    public ManagerData(int tu, int mont, float co, float ch, float te, float s, int p, int mone, int chp, int cop, int fp, int pp, List<Vector3> s1, List<Vector4> s2)
     {
         this.turn = tu;
         this.month = mont;
@@ -36,5 +39,7 @@ public class ManagerData
         this.co2Price = cop;
         this.fieldPrice = fp;
         this.pasturePrice = pp;
+        this.stats1 = s1;
+        this.stats2 = s2;
     }
 }

@@ -31,7 +31,7 @@ public class Grid : MonoBehaviour
 
     private static readonly Dictionary<TileType, TileBase> tileBases = new();
 
-    private readonly List<Box> boxes = new();
+    public readonly List<Box> boxes = new();
     private Box temp;
     private Vector3 previousPos;
     private BoundsInt previousArea;
@@ -91,9 +91,12 @@ public class Grid : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (temp.CanBePlaced())
+            Vector3Int positionInt = gridLayout.LocalToCell(temp.transform.position);
+            BoundsInt areaTemp = temp.area;
+            areaTemp.position = new Vector3Int(positionInt.x - 1, positionInt.y - 1, positionInt.z);
+            if (temp.CanBePlaced(areaTemp))
             {
-                temp.Place();
+                temp.Place(areaTemp);
                 temp = null;
                 GameManager.instance.button = true;
             }
@@ -105,6 +108,9 @@ public class Grid : MonoBehaviour
             GameManager.instance.button = true;
         }
     }
+    #endregion
+
+    #region BoardInitialization
 
     public void SetBlock(int x, int y, int i)
     {
@@ -116,25 +122,6 @@ public class Grid : MonoBehaviour
 
     public void NewGame()
     {
-        for(int i = 0; i < size.x + 2; i++)
-        {
-            for(int j = 0; j < size.y +2; j++)
-            {
-                int x = i - 5;
-                int y = j - 5;
-
-                if ((i < 1 && j < 1) || (i > size.x && j > size.y) || (i < 1 && j > size.y) || (i > size.x && j < 1))
-                {
-                    SetBlock(x, y, 2);
-                } else if ((i < 1) || (i > size.x))
-                {
-                    SetBlock(x, y, 4);
-                } else if ((j < 1) || (j > size.y))
-                {
-                    SetBlock(x, y, 3);
-                }
-            }
-        }
         for (int i = 0; i < size.x + 10; i++)
         {
             for (int j = 0; j < size.y + 10; j++)
@@ -147,40 +134,44 @@ public class Grid : MonoBehaviour
                     int index = Random.Range(0, 2);
                     SetBlock(x, y, index);
                 }
-            }
-        }
-        for (int i = 0; i < size.x; i++)
-        {
-            for (int j = 0; j < size.y; j++)
-            {
-                int x = i - 4;
-                int y = j - 4;
-
-                int index = Random.Range(0, elementPrefab.Length);
-                element = Instantiate(elementPrefab[index], root);
-                element.transform.position = new Vector3((x - y) * offset.x, (x + y + 2) * offset.y, 0);
-                element.transform.localScale = new Vector3(3, (float)2.75, 1);
-
-
-                element.area = new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one);
-
-                /*if (index == 0)
+                else if ((i == 4 && j == 4) || (i == (size.x + 5) && j == (size.y + 5)) || (i == 4 && j == (size.y + 5)) || (i == (size.x + 5) && j == 4))
                 {
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.FACTORY);
-                } else*/
-                if (index <= 2)
+                    SetBlock(x, y, 2);
+                }
+                else if ((i == 4) || (i == (size.x + 5)))
                 {
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
+                    SetBlock(x, y, 4);
+                }
+                else if ((j == 4) || (j == (size.y + 5)))
+                {
+                    SetBlock(x, y, 3);
                 }
                 else
                 {
-                    if (index == 4)
+                    int index = Random.Range(0, elementPrefab.Length);
+                    element = Instantiate(elementPrefab[index], root);
+                    element.transform.position = new Vector3((x - y) * offset.x, (x + y + 2) * offset.y, 0);
+                    element.transform.localScale = new Vector3(3, (float)2.75, 1);
+                    element.area = new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one);
+
+                    if (index == 0)
                     {
-                        element.index = 1;
+                        SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.FACTORY);
                     }
-                    SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
+                    else if (index <= 2)
+                    {
+                        SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
+                    }
+                    else
+                    {
+                        if (index == 4)
+                        {
+                            element.index = 1;
+                        }
+                        SetTilesBlock(new BoundsInt(new Vector3Int(x, y, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
+                    }
+                    boxes.Add(element);
                 }
-                boxes.Add(element);
             }
         }
     }
@@ -206,18 +197,36 @@ public class Grid : MonoBehaviour
         }
 
         Box[] tiles = FindObjectsOfType<Box>();
-        foreach(Box tile in tiles)
+        int i = 0;
+        foreach (Box tile in tiles)
         {
+            Debug.Log(i);
             if (tile.t == Box.BoxType.FACTORY)
             {
                 SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.FACTORY);
-            } else if (tile.t == Box.BoxType.AGRICULTURE)
+                if (i >= 0 && i < 81)
+                {
+                    boxes[i] = tile;
+                    i++;
+                }
+            }
+            else if (tile.t == Box.BoxType.AGRICULTURE)
             {
                 SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.AGRICULTURE);
+                if (i >= 0 && i < 81)
+                {
+                    boxes[i] = tile;
+                    i++;
+                }
             }
             else if (tile.t == Box.BoxType.NATURE)
             {
                 SetTilesBlock(new BoundsInt(new Vector3Int(tile.area.position.x, tile.area.position.y, 0), Vector3Int.one), MainTilemap, TileType.NATURE);
+                if(i >= 0 && i < 81)
+                {
+                    boxes[i] = tile;
+                    i++;
+                }
             }
             else
             {
@@ -295,14 +304,11 @@ public class Grid : MonoBehaviour
         {
             for (int i = 0; i < baseArray.Length; i++)
             {
-                if (baseArray[i] != tileBases[TileType.NATURE])
+                if (baseArray[i] == tileBases[TileType.FINAL])
                 {
-                    if (baseArray[i] != tileBases[TileType.AGRICULTURE])
-                    {
-                        SetTilesBlock(buildingArea, TempTilemap, TileType.FACTORY);
-                        previousArea = buildingArea;
-                        return;
-                    }
+                    SetTilesBlock(buildingArea, TempTilemap, TileType.FACTORY);
+                    previousArea = buildingArea;
+                    return;
                 }
             }
         }

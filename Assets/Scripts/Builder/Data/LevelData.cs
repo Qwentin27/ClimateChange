@@ -20,12 +20,10 @@ public class LevelData : ScriptableObject
     public BoxData[] natureData;
     public BoxData[] finalData;
 
-
-#if UNITY_EDITOR
     public void Save()
     {
         GameManager x = FindObjectOfType<GameManager>();
-        managerData = new ManagerData(x.turn, x.month, x.co2, x.ch4, x.temp, x.sealvl, x.popularity, x.money, x.ch4Price, x.co2Price, x.fieldPrice, x.pasturePrice);
+        managerData = new ManagerData(x.turn, x.month, x.co2, x.ch4, x.temp, x.sealvl, x.popularity, x.money, x.ch4Price, x.co2Price, x.fieldPrice, x.pasturePrice, x.stats1, x.stats2);
 
         // Chercher objets de type Factory
         Factory[] factories = FindObjectsOfType<Factory>();
@@ -100,7 +98,6 @@ public class LevelData : ScriptableObject
 
         Debug.Log("[Save] DONE !");
     }
-#endif
 
     private void DestroyCustom<T>() where T : MonoBehaviour
     {
@@ -169,6 +166,8 @@ public class LevelData : ScriptableObject
         m.co2Price = managerData.co2Price;
         m.pasturePrice = managerData.pasturePrice;
         m.fieldPrice = managerData.fieldPrice;
+        m.stats1 = managerData.stats1;
+        m.stats2 = managerData.stats2;
 
         Transform parentBox = CreateParentTransform("== BOXES ==");
 

@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d7aabd7447f9a4aa70061cec425c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: 69736fdf3ed3ed44fb681d9db54b6282, type: 2}
   button: 1
   turn: 0
   month: 0
@@ -331,6 +332,8 @@ MonoBehaviour:
   co2PriceText: {fileID: 687852707}
   fieldPriceText: {fileID: 854956802}
   pasturePriceText: {fileID: 796612239}
+  stats1: []
+  stats2: []
 --- !u!4 &81810920
 Transform:
   m_ObjectHideFlags: 0
@@ -344,7 +347,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &81834671
 GameObject:
@@ -4512,7 +4515,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1286338712
 GameObject:
@@ -5795,10 +5798,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602119246}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 81810919}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6417,7 +6420,7 @@ GameObject:
   - component: {fileID: 1842876287}
   - component: {fileID: 1842876288}
   m_Layer: 0
-  m_Name: '[ RNN ]'
+  m_Name: '[ RN ]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

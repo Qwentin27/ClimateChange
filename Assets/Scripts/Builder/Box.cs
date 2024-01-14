@@ -41,12 +41,8 @@ public class Box : MonoBehaviour
 
     #region Build Methods
 
-    public bool CanBePlaced()
+    public bool CanBePlaced(BoundsInt areaTemp)
     {
-        Vector3Int positionInt = Grid.current.gridLayout.LocalToCell(transform.position);
-        BoundsInt areaTemp = area;
-        areaTemp.position = new Vector3Int(positionInt.x - 1, positionInt.y - 1, positionInt.z);
-
         if (Grid.current.CanTakeArea(areaTemp))
         {
             return true;
@@ -54,11 +50,8 @@ public class Box : MonoBehaviour
         return false;
     }
 
-    public void Place()
+    public void Place(BoundsInt areaTemp)
     {
-        Vector3Int positionInt = Grid.current.gridLayout.LocalToCell(transform.position);
-        BoundsInt areaTemp = area;
-        areaTemp.position = new Vector3Int(positionInt.x - 1, positionInt.y - 1, positionInt.z);
         Placed = true;
         Grid.current.TakeArea(areaTemp);
     }

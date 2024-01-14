@@ -6,7 +6,7 @@ public class Factory : Box
 {
     private void Awake()
     {
-        this.t = BoxType.AGRICULTURE;
+        this.t = BoxType.FACTORY;
     }
 
     // Update is called once per frame
