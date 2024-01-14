@@ -35,5 +35,11 @@ public class Pasture : Box
             GameManager.instance.ChangePopularity(1);
             done = true;
         }
+        else if (level >= 1 && !done)
+        {
+            model1.SetActive(false);
+            model2.SetActive(true);
+            done = true;
+        }
     }
 }

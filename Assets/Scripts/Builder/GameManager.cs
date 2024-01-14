@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI fieldPriceText;
     public TextMeshProUGUI pasturePriceText;
 
+    public List<Vector3> stats1;
+    public List<Vector4> stats2;
+
     private void Awake()
     {
         if (instance == null)
@@ -67,7 +70,10 @@ public class GameManager : MonoBehaviour
         pasturePriceText.text = pasturePrice.ToString();
 
         monthText.text = ((month % 12) + 1) + "/" + (1880 + ((month + 1) / 12));
-    }
+
+        stats1 = new();
+        stats2 = new();
+}
 
     // Update is called once per frame
     void Update()
@@ -114,8 +120,12 @@ public class GameManager : MonoBehaviour
     {
         if(button && (turn < 60))
         {
+            stats1.Add(new Vector3(month, money, popularity));
+            stats2.Add(new Vector4(ch4, co2, temp, sealvl));
+
             turn++;
             month++;
+
             if (money < 0) ChangePopularity(-10);
             if (temp > 1.5) ChangePopularity(-10);
         }
