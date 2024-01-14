@@ -19,21 +19,22 @@ public class JsonReadWriteSystem : MonoBehaviour
     public GameObject FollowingButton;
     public Button btn1, btn2, btnf;
     public bool endGame;
+    public bool secondGame = true;
     public int actualNode;
     public int indexPassage = 0;
     public int indexSort;
     public GameObject ChoiceButton1Text, ChoiceButton2Text;
     public Dictionary<int, string> dictPassages = new Dictionary<int, string>();
-                    // (noeud du passage, passage à afficher)
+    // (noeud du passage, passage à afficher)
     public Dictionary<int, List<string>> dictResponses = new Dictionary<int, List<string>>();
-                    // (noeud du passage, réponses possibles)
+    // (noeud du passage, réponses possibles)
     public Dictionary<List<int>, int> dictNodes = new Dictionary<List<int>, int>();
     // (noeud actuel, choix fait -0, 1 ou 2-) --> nouveau noeud 
     // 0 : pas de choix / suite de l'explication de la/du secrétaire ; 1 : choix 1 ; 2 : choix 2
     public Queue<List<int>> queueMessages = new Queue<List<int>>();
     public Root originRoot;
 
-    // faire une fonction pour les choix du joueur et réfléchir aux enbranchements
+
 
     void Start()
     {
@@ -43,22 +44,6 @@ public class JsonReadWriteSystem : MonoBehaviour
         btn1.onClick.AddListener(ChoiceClick1);
         btn2.onClick.AddListener(ChoiceClick2);
         btnf.onClick.AddListener(followingMessage);
-        /*List<(int, int)> keys = new List<(int, int)>(dictNodes.Keys);
-        Debug.Log(keys.Count);
-        queueMessages.Enqueue(keys[0]);
-        Debug.Log(queueMessages.Peek());*/
-        
-        /*foreach (List<int> element in queueMessages)
-        {
-            Debug.Log(queueMessages.Dequeue());
-            List<int> l = new List<int> {1, 2};
-            queueMessages.Enqueue(dictNodes.Keys.FirstOrDefault(x => x == l));
-        }*/
-
-        /*foreach(KeyValuePair<int, string> item in dictPassages)
-        {
-            DisplayDialogue(item.)
-        }*/
     }
 
     public void followingMessage()
@@ -68,25 +53,6 @@ public class JsonReadWriteSystem : MonoBehaviour
 
     public void LaunchDiscussion()
     {
-        /*foreach (List<int> element in queueMessages.ToList())
-        {
-            //Debug.Log(queueMessages.Dequeue());
-
-            if (element[1] == 0)
-            {
-                DisplayDialogue(dictPassages[element[0]]);
-            }
-            else if (element[1] == 1 || element[1] == 2)
-            {
-                DisplayDialogue(dictPassages[element[0]]);
-                DisplayChoices(dictResponses[element[0]][0], dictResponses[element[0]][1]);
-                actualNode = element[0];
-            }
-
-            queueMessages.Dequeue();
-
-            /*List<int> l = new List<int> { 1, 2 };
-            queueMessages.Enqueue(dictNodes.Keys.FirstOrDefault(x => x == l));*/
 
         if (queueMessages.Count != 0)
         {
@@ -111,7 +77,6 @@ public class JsonReadWriteSystem : MonoBehaviour
                 }
             }
 
-            
         }
         else
         {
@@ -120,11 +85,34 @@ public class JsonReadWriteSystem : MonoBehaviour
                 PanelDialogue.SetActive(false);
                 PanelPersonnage2.SetActive(false);
                 PanelPersonnage1.SetActive(false);
+
+                if (secondGame)
+                {
+                    PanelDialogue.SetActive(true);
+                    PanelPersonnage1.SetActive(true);
+                    PanelPersonnage2.SetActive(true);
+                    dictPassages = new Dictionary<int, string>();
+                    dictResponses = new Dictionary<int, List<string>>();
+                    dictNodes = new Dictionary<List<int>, int>();
+                    queueMessages = new Queue<List<int>>();
+                    endGame = false;
+                    chemin = "Assets/Scripts/Dialogue/JSON/TwineOrigin2.json";
+                    jsonString = File.ReadAllText(chemin);
+                    originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
+                    Debug.Log("ORIGIN ROOT #### -> \n " + originRoot);
+                    FillDictionary();
+                    FillNodesDictionary();
+                    UpdateQueue(1);
+                    LaunchDiscussion();
+                    secondGame = false;
+                }
+
+
             }
         }
 
     }
-       
+
 
     public void UpdateQueue(int n)
     {
@@ -134,14 +122,14 @@ public class JsonReadWriteSystem : MonoBehaviour
         Passage foundPassage = originRoot.passages.First(passage => (passage.pid == "" + (n)));
 
         foreach (KeyValuePair<List<int>, int> item in dictNodes)
-        {   
+        {
             if (foundPassage.links == null)
             {
                 endGame = true;
                 DisplayDialogue(dictPassages[n]);
             }
             else
-            { 
+            {
                 if (item.Key[0] == n)
                 {
                     nodeFlag = true;
@@ -155,73 +143,25 @@ public class JsonReadWriteSystem : MonoBehaviour
 
                 Debug.Log("Le passage a un PID de : " + n + " et nodeFlag : " + nodeFlag + " et choiceFlag : " + choiceFlag);
                 if (item.Key[1] != 0)
-                {   
+                {
                     choiceFlag = false;
                 }
 
 
             }
-            
+
         }
-        Debug.Log(queueMessages.Count);
+        //Debug.Log(queueMessages.Count);
         /*if (end)
         {
             // après le bouton suite, cacher tout le truc des messages
         }*/
-        
+
     }
 
-    public void test(string jsonString)
-    {
-        /*string t = "{" +
-            "oui" +
-            "}";
-        string s = "";
-        for (int i = 1; i < t.Length ;i++)
-        {
-            s += t[i];
-        }
-        Debug.Log(s);
-        chemin = "Assets/Scripts/JSON/TwineOrigin.json";
-        jsonString = File.ReadAllText(chemin);
-        bool flag1 = true;
-        bool flag2 = true;
-        jsonString.Replace('[', 'e');
-        //Debug.Log(jsonString);
-
-       for (int i = 1; i < jsonString.Length; i++)
-        {
-
-            if (flag1 && jsonString[i] == ('[') && jsonString.Substring(i-11, 8) == "passages")
-            {
-                jsonString.Remove(i, 1);
-                flag1 = false;
-                i--;
-            }
-
-            if (flag2 && jsonString[i] == (']') && jsonString.Substring(i+10, 13) == "Projet Climat") // a vérifier
-            {
-                jsonString.Remove(i, 1);
-                flag2 = false;
-                i--;
-            }
-
-        }*/
-
-        //jsonString.Replace("passages", "D1"); // va remplacer tous les passages
-    }
 
     public void FillNodesDictionary()
     {
-        //int sameIndex = 0;
-
-        /*for (int i = 0; i < dictResponses.Count; i++)
-        {
-            KeyValuePair<int, List<string>> entry = dictResponses.ElementAt(i);
-            Debug.Log(entry.Key + " : " + entry.Value);
-        }*/
-
-        //Debug.Log("Nombre " + dictResponses.Count);
 
         foreach (KeyValuePair<int, string> item in dictPassages)
         {
@@ -235,9 +175,9 @@ public class JsonReadWriteSystem : MonoBehaviour
             //Debug.Log("Is Links Empty ? " + (originRoot.passages[item.Key].links.Count == 0));
             //Debug.Log("originRoot.passages[item.Key].links[0]  = " + originRoot.passages[item.Key].links[0]);
 
-            Passage foundPassage = originRoot.passages.First(passage => (passage.pid == ""+(item.Key)));
+            Passage foundPassage = originRoot.passages.First(passage => (passage.pid == "" + (item.Key)));
             //Debug.Log(foundPassage);
-            if(foundPassage != null && foundPassage.links != null)
+            if (foundPassage != null && foundPassage.links != null)
             {
                 //Debug.Log(foundPassage);
                 if (foundPassage.links.Count == 1)
@@ -249,7 +189,7 @@ public class JsonReadWriteSystem : MonoBehaviour
                 {
                     foreach (Link l in foundPassage.links)
                     {
-                        List<int> replaceList = new List<int> {item.Key, 1};
+                        List<int> replaceList = new List<int> { item.Key, 1 };
                         bool containsFlag = false;
                         foreach (List<int> key in dictNodes.Keys)
                         {
@@ -261,22 +201,22 @@ public class JsonReadWriteSystem : MonoBehaviour
 
                         if (containsFlag)
                         {
-                            List<int> replaceList2 = new List<int> {item.Key, 2};
+                            List<int> replaceList2 = new List<int> { item.Key, 2 };
                             dictNodes.Add(replaceList2, int.Parse(foundPassage.links[1].pid));
                         }
                         else
                         {
                             dictNodes.Add(replaceList, int.Parse(foundPassage.links[0].pid));
                         }
-                            
+
                     }
                 }
-                
-                
+
+
             }
             else
             {
-                List<int> replaceList = new List<int> {item.Key, 0};
+                List<int> replaceList = new List<int> { item.Key, 0 };
                 dictNodes.Add(replaceList, 0);
             }
             //if (originRoot.passages.Count >= item.Key && originRoot.passages[item.Key].links != null)
@@ -293,7 +233,7 @@ public class JsonReadWriteSystem : MonoBehaviour
 
     public void FillDictionary()
     {
-        
+
         for (int i = 0; i < originRoot.passages.Count; i++)
         {
             dictPassages.Add(int.Parse(originRoot.passages[i].pid), originRoot.passages[i].text);
@@ -314,29 +254,21 @@ public class JsonReadWriteSystem : MonoBehaviour
             {
                 dictResponses.Add(int.Parse(originRoot.passages[i].pid), passLinks);
             }
-            
+
         }
     }
 
     public string SortMessages(string sub)
     {
         indexSort = sub.IndexOf('|');
-        Debug.Log(sub);
-        //Debug.Log(indexSort);
         sub = sub.Substring(0, indexSort);
-
         return sub;
     }
 
     public void ChoiceClick1() // le joueur a effectué le choix 1
     {
-        /*Debug.Log("Noeud actuel" + actualNode);
-        List<int> nodeList = new List<int>();
-        nodeList.Add(actualNode);
-        nodeList.Add(1);
-        int newNode = dictNodes[nodeList];*/
-        Debug.Log("Noeud actuel : " + actualNode);
-        Debug.Log(SearchPidNewPassageThroughChoice1(actualNode));
+        //Debug.Log("Noeud actuel : " + actualNode);
+        //Debug.Log(SearchPidNewPassageThroughChoice1(actualNode));
         ChoiceButton1Text.GetComponent<TMPro.TMP_Text>().text = "";
         ChoiceButton2Text.GetComponent<TMPro.TMP_Text>().text = "";
         ChoiceButton1.SetActive(false);
@@ -359,8 +291,8 @@ public class JsonReadWriteSystem : MonoBehaviour
 
     public void ChoiceClick2() // le joueur a effectué le choix 2
     {
-        Debug.Log("Noeud actuel : " + actualNode);
-        Debug.Log(SearchPidNewPassageThroughChoice2(actualNode));
+        //Debug.Log("Noeud actuel : " + actualNode);
+        //Debug.Log(SearchPidNewPassageThroughChoice2(actualNode));
         ChoiceButton1Text.GetComponent<TMPro.TMP_Text>().text = "";
         ChoiceButton2Text.GetComponent<TMPro.TMP_Text>().text = "";
         ChoiceButton1.SetActive(false);
@@ -409,37 +341,9 @@ public class JsonReadWriteSystem : MonoBehaviour
         }
     }
 
-    /*public static void PrintDictResponses<K, List<string>>(Dictionary<K, List<string>> dict)
+
+    public void LoadFromJson()
     {
-        foreach (K key in dict.Keys)
-        {
-            for (int i = 0; i < (dict[key]).Count; i++)
-            {
-                Debug.Log(key + " : " + (dict[key])[i]);
-            }
-            
-        }
-    }*/
-
-    
-
-    public void LoadFromJson() // voir JsonDemo du projet d'externalisation avec M. Panzoli
-
-        // Dans le Json, les balises (text1) correspondent au texte dit au joueur et (resp0) à la réponse proposée au joueur.
-
-        // Il faudra alors vérifier qu'il n'y ait pas les réponses en tant que texte dit au joueur (étant donné que les réponses
-        // sont également dans le JSON avec les balises (text1) de façon automatique).
-
-        // A VOIR SI ON UTILISE PAS PLUTÔT LES BALISES "TEXT" ET "NAME" DEJA EXISTANTES 
-    {
-
-        /*
-        //Debug.Log(jsonString);
-        textDisplay.GetComponent<Text>().text = jsonString; // affichage du texte
-        values = JsonConvert.DeserializeObject<Dictionary<string, Passage>>(jsonString);
-        //Passage[] values = JsonHelper.getJsonArray<Passage>(jsonString);
-        //Debug.Log(s);
-        Debug.Log(values["passages"].text);*/
         PanelDialogue.SetActive(true);
         PanelPersonnage1.SetActive(true);
         PanelPersonnage2.SetActive(true);
@@ -448,8 +352,11 @@ public class JsonReadWriteSystem : MonoBehaviour
         jsonString = File.ReadAllText(chemin);
         originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
         Debug.Log("ORIGIN ROOT #### -> \n " + originRoot);
-        //DisplayDialogue(originRoot.passages[0].text);
         FillDictionary();
+        FillNodesDictionary();
+        UpdateQueue(1);
+        LaunchDiscussion();
+
         //PrintDictPassages(dictPassages);
         //Debug.Log("Nombre passages : " + dictPassages.Count);
 
@@ -460,10 +367,7 @@ public class JsonReadWriteSystem : MonoBehaviour
                 Debug.Log(key + " : " + (dictResponses[key])[i]);
             }
 
-        }*/
-
-        FillNodesDictionary();
-        //Debug.Log(dictNodes.Count);
+        }
 
         foreach (List<int> key in dictNodes.Keys)
         {
@@ -472,20 +376,10 @@ public class JsonReadWriteSystem : MonoBehaviour
 
         }
 
-        /*Debug.Log(queueMessages.Peek());
+        Debug.Log(queueMessages.Peek());
         Debug.Log(queueMessages.Count);*/
 
-        UpdateQueue(1);
-        LaunchDiscussion();
-        //Debug.Log(queueMessages.Count);
 
-        /*if (queueMessages.Count > 0)
-        {
-            updateQueue();
-        }*/
-
-        //textDisplay.GetComponent<Text>().text = root.passages[0].text;
-        //Debug.Log(root.passages[0].text);
     }
 
     [System.Serializable]
@@ -512,9 +406,9 @@ public class JsonReadWriteSystem : MonoBehaviour
         public override string ToString()
         {
             string message = "[" + pid + "] - " + name + ((links != null && links.Count > 0) ? " :" : "");
-            if(links!=null)
+            if (links != null)
                 for (int i = 0; i < links.Count; i++)
-                    message += "\n\t\t"+ links[i].ToString();
+                    message += "\n\t\t" + links[i].ToString();
             return message;
         }
     }

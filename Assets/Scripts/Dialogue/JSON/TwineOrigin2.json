@@ -1,0 +1,419 @@
+
+
+{
+  "passages": [
+    {
+      "text": "Enfin bref, quelle campagne d'élection me direz-vous !|\n[[suite 1]]",
+      "links": [
+        {
+          "name": "suite 1",
+          "link": "suite 1",
+          "pid": "2"
+        }
+      ],
+      "name": "Début",
+      "pid": "1",
+      "position": {
+        "x": "625",
+        "y": "275"
+      }
+    },
+    {
+      "text": "En effet, depuis que la planète Terre n'est plus \"accueillante\", différentes colonies se sont dispersées sur des planètes super-habitables.|\n[[suite 2]]",
+      "links": [
+        {
+          "name": "suite 2",
+          "link": "suite 2",
+          "pid": "3"
+        }
+      ],
+      "name": "suite 1",
+      "pid": "2",
+      "position": {
+        "x": "625",
+        "y": "400"
+      }
+    },
+    {
+      "text": "La planète Kepler-I649C sur laquelle vous vous trouvez actuellement en constitue une des inombrables présentes dans l'univers.|\n[[suite 3]]",
+      "links": [
+        {
+          "name": "suite 3",
+          "link": "suite 3",
+          "pid": "4"
+        }
+      ],
+      "name": "suite 2",
+      "pid": "3",
+      "position": {
+        "x": "625",
+        "y": "525"
+      }
+    },
+    {
+      "text": "Mais ça vous le savez déjà puisque vous êtes là !|\n[[suite 4]]",
+      "links": [
+        {
+          "name": "suite 4",
+          "link": "suite 4",
+          "pid": "5"
+        }
+      ],
+      "name": "suite 3",
+      "pid": "4",
+      "position": {
+        "x": "625",
+        "y": "650"
+      }
+    },
+    {
+      "text": "Vous voilà donc dans le centre de gestion de votre cité. Sympa n'est ce pas ?|\n[[suite 5]]",
+      "links": [
+        {
+          "name": "suite 5",
+          "link": "suite 5",
+          "pid": "6"
+        }
+      ],
+      "name": "suite 4",
+      "pid": "5",
+      "position": {
+        "x": "625",
+        "y": "775"
+      }
+    },
+    {
+      "text": "En haut à gauche, vous trouverez la section inventaire comportant les différents bâtiments et constructions utiles à l'établissement de votre ville. De plus, votre argent est affiché juste à côté du bouton inventaire.|\n[[suite 6]]",
+      "links": [
+        {
+          "name": "suite 6",
+          "link": "suite 6",
+          "pid": "7"
+        }
+      ],
+      "name": "suite 5",
+      "pid": "6",
+      "position": {
+        "x": "625",
+        "y": "900"
+      }
+    },
+    {
+      "text": "Evidemment, construire des structures vous coûtera de l'argent. Cependant, cette action est également possible si vous en avez pas assez.|\n[[suite 7]]",
+      "links": [
+        {
+          "name": "suite 7",
+          "link": "suite 7",
+          "pid": "8"
+        }
+      ],
+      "name": "suite 6",
+      "pid": "7",
+      "position": {
+        "x": "625",
+        "y": "1025"
+      }
+    },
+    {
+      "text": "Mais attention ! Vos dettes s'accumuleront alors et auront un impact sur votre côte de popularité. Vous pouvez constater cette dernière à l'aide de la jauge à droite de votre écran.|\n[[suite 8]]",
+      "links": [
+        {
+          "name": "suite 8",
+          "link": "suite 8",
+          "pid": "9"
+        }
+      ],
+      "name": "suite 7",
+      "pid": "8",
+      "position": {
+        "x": "625",
+        "y": "1150"
+      }
+    },
+    {
+      "text": "Les 4 valeurs en bas de votre écran indiquent respectivement le niveau de montée des eaux, la température actuelle, le taux de méthane et le taux de CO2.|\n[[suite 9]]",
+      "links": [
+        {
+          "name": "suite 9",
+          "link": "suite 9",
+          "pid": "10"
+        }
+      ],
+      "name": "suite 8",
+      "pid": "9",
+      "position": {
+        "x": "625",
+        "y": "1275"
+      }
+    },
+    {
+      "text": "L'encadré en haut à droite indique le mois et l'année actuels. Vous verrez ainsi l'avancée sur votre mandat.|\n[[suite 10]]",
+      "links": [
+        {
+          "name": "suite 10",
+          "link": "suite 10",
+          "pid": "11"
+        }
+      ],
+      "name": "suite 9",
+      "pid": "10",
+      "position": {
+        "x": "625",
+        "y": "1400"
+      }
+    },
+    {
+      "text": "Le petit bouton en dessous de la jauge de popularité est directement lié cette dernière. \nIl vous permet d'avancer d'un mois.|\n[[suite 11]]",
+      "links": [
+        {
+          "name": "suite 11",
+          "link": "suite 11",
+          "pid": "12"
+        }
+      ],
+      "name": "suite 10",
+      "pid": "11",
+      "position": {
+        "x": "625",
+        "y": "1525"
+      }
+    },
+    {
+      "text": "En effet, une fois toutes vos actions effectuées (création de bâtiment, signature de décrets...), vous pourrez passer au mois suivant et ainsi de suite.|\n[[suite 12]]",
+      "links": [
+        {
+          "name": "suite 12",
+          "link": "suite 12",
+          "pid": "13"
+        }
+      ],
+      "name": "suite 11",
+      "pid": "12",
+      "position": {
+        "x": "625",
+        "y": "1650"
+      }
+    },
+    {
+      "text": "Ainsi vous verrez l'impact de vos actions et l'évolution de l'éco-système.|\n[[suite 13]]",
+      "links": [
+        {
+          "name": "suite 13",
+          "link": "suite 13",
+          "pid": "14"
+        }
+      ],
+      "name": "suite 12",
+      "pid": "13",
+      "position": {
+        "x": "625",
+        "y": "1775"
+      }
+    },
+    {
+      "text": "Le bouton tout en haut à droite correspond aux options.|\n[[suite 14]]",
+      "links": [
+        {
+          "name": "suite 14",
+          "link": "suite 14",
+          "pid": "15"
+        }
+      ],
+      "name": "suite 13",
+      "pid": "14",
+      "position": {
+        "x": "625",
+        "y": "1900"
+      }
+    },
+    {
+      "text": "Vous l'aurez compris : vos actions auront un impact sur votre territoire.|\n[[suite 15]]",
+      "links": [
+        {
+          "name": "suite 15",
+          "link": "suite 15",
+          "pid": "16"
+        }
+      ],
+      "name": "suite 14",
+      "pid": "15",
+      "position": {
+        "x": "625",
+        "y": "2025"
+      }
+    },
+    {
+      "text": "Attention à ne pas dépasser un seuil critique donc ! Nous ne sommes pas à l'abri d'une catastrophe naturelle.|\n[[suite 16]]",
+      "links": [
+        {
+          "name": "suite 16",
+          "link": "suite 16",
+          "pid": "17"
+        }
+      ],
+      "name": "suite 15",
+      "pid": "16",
+      "position": {
+        "x": "625",
+        "y": "2150"
+      }
+    },
+    {
+      "text": "Par la suite, je reviendrai de temps à autres vers vous pour avoir votre aval concernant\ndes décrets et actions à prendre.|\n[[suite 17]]",
+      "links": [
+        {
+          "name": "suite 17",
+          "link": "suite 17",
+          "pid": "18"
+        }
+      ],
+      "name": "suite 16",
+      "pid": "17",
+      "position": {
+        "x": "625",
+        "y": "2275"
+      }
+    },
+    {
+      "text": "Parfois, des personnes extérieures interviendront directement pour vous présenter leurs projets et propositions : à vous de les accepter ou non.|\n[[suite 18]]",
+      "links": [
+        {
+          "name": "suite 18",
+          "link": "suite 18",
+          "pid": "19"
+        }
+      ],
+      "name": "suite 17",
+      "pid": "18",
+      "position": {
+        "x": "625",
+        "y": "2400"
+      }
+    },
+    {
+      "text": "Bien ! Tout est en place !|\n[[suite 19]]",
+      "links": [
+        {
+          "name": "suite 19",
+          "link": "suite 19",
+          "pid": "20"
+        }
+      ],
+      "name": "suite 18",
+      "pid": "19",
+      "position": {
+        "x": "625",
+        "y": "2525"
+      }
+    },
+    {
+      "text": "Souvenez-vous ! Ne faites pas les mêmes erreurs que l'ancien président !|\n[[suite 20]]",
+      "links": [
+        {
+          "name": "suite 20",
+          "link": "suite 20",
+          "pid": "21"
+        }
+      ],
+      "name": "suite 19",
+      "pid": "20",
+      "position": {
+        "x": "625",
+        "y": "2650"
+      }
+    },
+    {
+      "text": "Construisez, réfléchissez et prosprérez. Bon courage !|\n[[suite 21]]",
+      "links": [
+        {
+          "name": "suite 21",
+          "link": "suite 21",
+          "pid": "22"
+        }
+      ],
+      "name": "suite 20",
+      "pid": "21",
+      "position": {
+        "x": "625",
+        "y": "2775"
+      }
+    },
+    {
+      "text": "Oh j'allais oublier !|\n[[suite 22]]",
+      "links": [
+        {
+          "name": "suite 22",
+          "link": "suite 22",
+          "pid": "23"
+        }
+      ],
+      "name": "suite 21",
+      "pid": "22",
+      "position": {
+        "x": "625",
+        "y": "2900"
+      }
+    },
+    {
+      "text": "Une première proposition est parvenue jusqu'au bureau : un vaisseau cargo en orbite autour de la Terre vous propose de prendre tout sa cargaison de déchets moyennant finances.|\n[[suite 23]]",
+      "links": [
+        {
+          "name": "suite 23",
+          "link": "suite 23",
+          "pid": "24"
+        }
+      ],
+      "name": "suite 22",
+      "pid": "23",
+      "position": {
+        "x": "625",
+        "y": "3025"
+      }
+    },
+    {
+      "text": "Cela donnerait un coup de boost à nos moyens économiques. Mais cela pourrait avoir un impact négatif sur votre cote et les émissions de CO2. Qu'en pensez-vous ?|\n[[Accepter]]\n[[Refuser]]",
+      "links": [
+        {
+          "name": "Accepter",
+          "link": "Accepter",
+          "pid": "25"
+        },
+        {
+          "name": "Refuser",
+          "link": "Refuser",
+          "pid": "26"
+        }
+      ],
+      "name": "suite 23",
+      "pid": "24",
+      "position": {
+        "x": "625",
+        "y": "3150"
+      }
+    },
+    {
+      "text": "Très bien ! Je leur envoie un message acceptant leur proposition. A plus tard madame la présidente !|",
+      "name": "Accepter",
+      "pid": "25",
+      "position": {
+        "x": "625",
+        "y": "3275"
+      }
+    },
+    {
+      "text": "Vous avez raison. Je pense qu'il vaut mieux décliner leur offre. Je leur envoie votre refus \net je vous vois plus tard.|",
+      "name": "Refuser",
+      "pid": "26",
+      "position": {
+        "x": "750",
+        "y": "3275"
+      }
+    }
+  ],
+  "name": "Tuto - Partie 2 - Green Healthy Planet",
+  "startnode": "1",
+  "creator": "Twine",
+  "creator-version": "2.8.0",
+  "ifid": "50BDD17A-79A1-4DF7-A813-C7CCDEF1D074"
+}
+
