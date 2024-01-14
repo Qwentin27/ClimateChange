@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 public class Grid : MonoBehaviour
 {
     public static Grid current;
+    public JsonReadWriteSystem instanceJson;
 
     public Vector2Int size;
     public Vector2 offset;
@@ -46,6 +47,7 @@ public class Grid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instanceJson.LoadFromJson();
         string tilePath = @"Tiles/";
         if (!tileBases.ContainsKey(TileType.FINAL))
         {

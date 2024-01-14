@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         fieldPriceText.text = fieldPrice.ToString();
         pasturePriceText.text = pasturePrice.ToString();
 
+
         stats1 = new();
         stats2 = new();
 }
