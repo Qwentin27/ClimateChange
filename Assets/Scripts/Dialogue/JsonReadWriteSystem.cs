@@ -18,6 +18,7 @@ public class JsonReadWriteSystem : MonoBehaviour
     public GameObject FollowingButton;
     public Button btn1, btn2, btnf;
     public bool endGame;
+    public bool secondGame = true;
     public int actualNode;
     public int indexPassage = 0;
     public int indexSort;
@@ -116,11 +117,23 @@ public class JsonReadWriteSystem : MonoBehaviour
             {
                 PanelDialogue.SetActive(false);
                 PanelPersonnage2.SetActive(false);
-                /*chemin = "Assets/Scripts/Dialogue/JSON/TwineOrigin.json";
+                /*if (secondGame)
+                {
+                chemin = "Assets/Scripts/Dialogue/JSON/TwineOrigin2.json";
                 jsonString = File.ReadAllText(chemin);
                 originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
+                dictPassages = new Dictionary<int, string>();
+                dictResponses = new Dictionary<int, List<string>>();
+                dictNodes = new Dictionary<List<int>, int>();
+                queueMessages = new Queue<List<int>>();
+                endGame = false;
                 FillDictionary();
-                FillNodesDictionary();*/
+                FillNodesDictionary();
+                UpdateQueue(1);
+                LaunchDiscussion();
+                secondGame = false;
+                }*/
+
             }
         }
 
@@ -172,45 +185,6 @@ public class JsonReadWriteSystem : MonoBehaviour
         
     }
 
-    public void test(string jsonString)
-    {
-        /*string t = "{" +
-            "oui" +
-            "}";
-        string s = "";
-        for (int i = 1; i < t.Length ;i++)
-        {
-            s += t[i];
-        }
-        Debug.Log(s);
-        chemin = "Assets/Scripts/JSON/TwineOrigin.json";
-        jsonString = File.ReadAllText(chemin);
-        bool flag1 = true;
-        bool flag2 = true;
-        jsonString.Replace('[', 'e');
-        //Debug.Log(jsonString);
-
-       for (int i = 1; i < jsonString.Length; i++)
-        {
-
-            if (flag1 && jsonString[i] == ('[') && jsonString.Substring(i-11, 8) == "passages")
-            {
-                jsonString.Remove(i, 1);
-                flag1 = false;
-                i--;
-            }
-
-            if (flag2 && jsonString[i] == (']') && jsonString.Substring(i+10, 13) == "Projet Climat") // a vérifier
-            {
-                jsonString.Remove(i, 1);
-                flag2 = false;
-                i--;
-            }
-
-        }*/
-
-        //jsonString.Replace("passages", "D1"); // va remplacer tous les passages
-    }
 
     public void FillNodesDictionary()
     {
