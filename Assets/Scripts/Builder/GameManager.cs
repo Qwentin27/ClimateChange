@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void NextTurn()
     {
-        if(button && (turn < 60))
+        if(button)
         {
             stats1.Add(new Vector3(month, money, popularity));
             stats2.Add(new Vector4(ch4, co2, temp, sealvl));
