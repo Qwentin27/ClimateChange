@@ -116,6 +116,11 @@ public class JsonReadWriteSystem : MonoBehaviour
             {
                 PanelDialogue.SetActive(false);
                 PanelPersonnage2.SetActive(false);
+                /*chemin = "Assets/Scripts/Dialogue/JSON/TwineOrigin.json";
+                jsonString = File.ReadAllText(chemin);
+                originRoot = JsonConvert.DeserializeObject<Root>(jsonString);
+                FillDictionary();
+                FillNodesDictionary();*/
             }
         }
 
